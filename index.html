@@ -1,86 +1,42 @@
-<!-- This Source Code Form is subject to the terms of the Mozilla Public
-   - License, v. 2.0. If a copy of the MPL was not distributed with this
-   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <!DOCTYPE html>
 <html>
 <head>
-  <title>404 Bookmarks</title>
+  <title>Count bookmarks</title>
   <meta charset="utf-8">
   <style>
   * {
     font-family: sans-serif;
   }
-
-  a.remove {
-    text-decoration: none;
-    background-color: #44c767;
-    border-radius: 15px;
-    border: 1px solid #18ab29;
-    display: inline-block;
-    color: #ffffff;
-    padding: 0.2em 0.5em;
-    margin-bottom: 0.1em;
-  }
-
-  a.remove:hover {
-    background-color: #c74462;
-    border-color: #581a28;
-  }
-
-  a.remove.disabled, a.remove.disabled:hover {
-    background-color: gray;
-    color: #ffffff;
+  #history-table, th, td {
     border: 1px solid black;
-    pointer-events: none;
-  }
-
-  a.select-all {
-    color: inherit;
-    text-decoration: none;
-    outline: none;
-  }
-
-  ul {
-    list-style: none;
-    padding-left: 0;
-    margin-top: 0em;
-  }
-
-  h1 {
-    margin-bottom: 0.2em;
-  }
-
-  input {
-    outline: none;
-  }
-
-  p {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-  }
-
-  #unexpired {
-    padding-top: 2em;
-    color: gray;
+    border-collapse: collapse;
+    padding: 7px;
   }
   </style>
 </head>
 <body>
 
-<div id="404-errors-ctr">
-<h1>Expired bookmarks</h1>
-<ul id="404-errors"></ul>
-<a href="#" class="remove disabled">Select bookmarks to remove</a> <a href="#" class="select-all">Select all</a>
-</div>
+<div id="bookmarks-count">Bookmarks count: <span id="counter">(loading...)</span></div>
 
-<div id="other-errors-ctr">
-<h1>Other bookmarks</h1>
-<p>These bookmarks <em>might not be expired</em>, but some other error occurred while looking up the page.</p>
-<ul id="other-errors"></ul>
-<a href="#" class="remove disabled">Select bookmarks to remove</a> <a href="#" class="select-all">Select all</a>
-</div>
+<hr>
 
-<div id="unexpired">Found <span id="live"></span> unexpired bookmarks.</div>
+<button id=clear-history-btn>Clear stats history</button>
+<br>
+
+<hr>
+
+<div id="history-div">
+<table id="history-table">
+  <thead>
+  <tr>
+    <th>Timestamp</th>
+    <th>Count</th>
+  </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
 
 <script src="script.js"></script>
 </body>

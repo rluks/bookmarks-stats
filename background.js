@@ -1,47 +1,68 @@
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
+//listener required
 browser.browserAction.onClicked.addListener(() => {
+    count();
     browser.tabs.create({url: "/index.html"});
 });
 
+/* -------------------------------------------------------- */
 
-async function findDead(error, progress) {
-    const ignoredScheme = /^(place|about|javascript|data)\:/i;
+/*                        STORAGE                           */
 
-    let found = 0;
-    let running = 0;
-    function work(queue, error, progress) {
-        if (running > 30) {
-            setTimeout(work, 500, queue, error, progress);
-            return;
-        }
-        if (queue.length == 0) {
-            return;
-        }
+/* -------------------------------------------------------- */
 
-        running++;
-        const [url, bookmark] = queue.shift();
-        // Can't use HEAD request, because a ton of websites return a 405 error.
-        // For example amazon.com or medium.com.
-        fetch(url).then(response => {
-            running--;
+/* generic error handler */
+function onError(error) {
+  console.log(error);
+}
 
-            if (!response.ok) {
-                error(bookmark, response.status);
-                return;
-            }
-
-            found++;
-            progress(bookmark.id, found);
-        }).catch(exception => {
-            running--;
-            error(bookmark, exception.toString())
-        });
-
-        work(queue, error, progress);
+/*function initializeStorage() {
+  var gettingAllStorageItems = browser.storage.local.get(null);
+  gettingAllStorageItems.then((results) => {
+    var noteKeys = Object.keys(results);
+    for (let noteKey of noteKeys) {
+      var curValue = results[noteKey];
+      displayNote(noteKey,curValue);
     }
+  }, onError);
+}*/
+
+function storeNote(timestamp, body) {
+  var storingNote = browser.storage.local.set({ [timestamp] : body });
+  storingNote.then(() => {
+    //displayNote(timestamp,body);
+  }, onError);
+}
+
+/* clearing storage */
+function onCleared() {
+  console.log("Storage cleared, OK.");
+}
+
+function clearStorage(){
+	var clearStorage = browser.storage.local.clear();
+	clearStorage.then(onCleared, onError);
+}
+/* -------------------------------------------------------- */
+
+/*           COMMUNCIATION with CONTENT SCRIPT              */
+
+/* -------------------------------------------------------- */
+function onMessage(message, sender, sendResponse) {
+    if (message.type == "clear_history") {
+      clearStorage();
+    }
+}
+
+browser.runtime.onMessage.addListener(onMessage);
+
+/* -------------------------------------------------------- */
+
+/*                        COUNT                             */
+
+/* -------------------------------------------------------- */
+
+function count(){
+	const ignoredScheme = /^(place|about|javascript|data)\:/i;
 
     browser.bookmarks.search({}).then(bookmarks => {
         let queue = [];
@@ -53,23 +74,28 @@ async function findDead(error, progress) {
 
             queue.push([url, bookmark]);
         }
-
-        work(queue, error, progress);
+		bookmarksCount = queue.length;
+		displayCountBadge();
+		storeCount();
     });
 }
 
-function onMessage(message, sender, sendResponse) {
-    if (message.type == "find_dead") {
-        findDead((bookmark, error) => {
-            browser.tabs.sendMessage(sender.tab.id, {type: "dead", bookmark, error});
-        }, (id, found) => {
-            browser.tabs.sendMessage(sender.tab.id, {type: "alive", id, found});
-        });
-    } else if (message.type == "remove") {
-        browser.bookmarks.remove(message.id);
-    }
-
-    return true;
+function displayCountBadge(){
+	browser.browserAction.setBadgeText({text: bookmarksCount.toString()});
 }
 
-browser.runtime.onMessage.addListener(onMessage);
+function storeCount(){
+	storeNote(new Date(), bookmarksCount);
+}
+
+/* -------------------------------------------------------- */
+
+/*                        MAIN                              */
+
+/* -------------------------------------------------------- */
+
+var bookmarksCount = 0;
+var intervalSeconds = 10;
+
+count();
+setInterval(count, intervalSeconds * 1000);

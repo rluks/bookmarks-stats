@@ -1,93 +1,89 @@
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-function handleDead({bookmark, error}) {
-    if (document.getElementById("bookmark-" + bookmark.id))
-        return;
-
-    const li = document.createElement("li")
-    li.id = "bookmark-" + bookmark.id;
-
-    const input = document.createElement("input");
-    input.type = "checkbox";
-    li.append(input)
-
-    li.append(" ")
-
-    const a = document.createElement("a");
-    a.href = bookmark.url;
-    a.textContent = bookmark.title || bookmark.url;
-    a.target = "_blank";
-    li.append(a);
-
-    li.append(` (${error})`);
-
-    const ul = document.getElementById((error === 404) ? "404-errors" : "other-errors");
-    ul.append(li);
+function onError(error) {
+  console.log(error);
 }
 
-function handleAlive({id, found}) {
-    const li = document.getElementById("bookmark-" + id);
-    if (li) {
-        const ul = document.querySelector("ul");
-        ul.removeChild(li);
+function initializeStorage() {
+  var gettingAllStorageItems = browser.storage.local.get(null);
+  gettingAllStorageItems.then((results) => {
+    var noteKeys = Object.keys(results);
+    for (let noteKey of noteKeys) {
+      var curValue = results[noteKey];
+      displayNote(noteKey,curValue);
     }
-
-    document.querySelector("#live").textContent = found;
+  }, onError);
 }
 
-function onMessage(message) {
-    if (message.type === "dead") {
-        handleDead(message);
-    } else if (message.type === "alive") {
-        handleAlive(message);
-    }
+function displayCount(){
+	document.querySelector("#counter").textContent = bookmarksCount;
 }
 
-browser.runtime.onMessage.addListener(onMessage);
-browser.runtime.sendMessage({type: "find_dead"});
-
-function update(name) {
-    const ctr = document.getElementById(name);
-
-    const selected = ctr.querySelectorAll("input:checked").length;
-    const removal = ctr.querySelector("a.remove");
-    if (selected === 0) {
-        removal.classList.add("disabled");
-        removal.textContent = "Select bookmarks to remove";
-    } else if (selected === 1) {
-        removal.classList.remove("disabled");
-        removal.textContent = "Remove 1 bookmark";
-    } else {
-        removal.classList.remove("disabled");
-        removal.textContent = `Remove ${selected} bookmarks`;
+//stupid js
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
     }
+    return i;
 }
 
-document.body.addEventListener("click", function(event) {
-    const t = event.target;
-    if (t.classList.contains("select-all")) {
-        for (let input of t.parentNode.querySelectorAll("input")) {
-            input.checked = true;
-        }
-        event.preventDefault();
-    } else if (t.classList.contains("remove")) {
-        const toRemove = t.parentNode.querySelectorAll("li > input:checked");
-        if (toRemove.length >= 5) {
-            if (!confirm(`Are you sure you want to remove ${toRemove.length} bookmarks? This operation cannot be undone.`))
-                return;
-        }
+function formatTimestamp(timestamp){
+  var dateObj = new Date(timestamp);
+  var isoDate = dateObj.toISOString();
 
-        for (let node of toRemove) {
-            node = node.parentNode; // Selected input, but want li.
-            browser.runtime.sendMessage({type: "remove", id: node.id.replace("bookmark-", "")});
-            node.remove();
-        }
-        event.preventDefault();
-    }
+  var datepart =  isoDate.split('T')[0];
+  var hours = addZero(dateObj.getHours());
+  var minutes =  addZero(dateObj.getMinutes());
+  var seconds =  addZero(dateObj.getSeconds());
+  var timePart = hours + ":" + minutes + ":" + seconds;
 
-    update("404-errors-ctr");
-    update("other-errors-ctr");
+  var tmpStr = datepart + " " + timePart;
+  return tmpStr;
+}
+
+function displayNote(timestamp, body) {
+	var tableRef = document.getElementById('history-table').getElementsByTagName('tbody')[0];
+	var newRow = tableRef.insertRow(tableRef.rows.length);
+
+	var newCell  = newRow.insertCell(0);
+	var newText  = document.createTextNode(formatTimestamp(timestamp));
+  newCell.appendChild(newText);
+
+	var newCell2  = newRow.insertCell(1);
+	var newText2  = document.createTextNode(body);
+  newCell2.appendChild(newText2);
+}
+
+function requestClearingHistoryStorage(){
+	browser.runtime.sendMessage({type: "clear_history"});
+}
+
+function clearHistoryTableHTML(){
+	var old_tbody = document.getElementById('history-table').getElementsByTagName('tbody')[0];
+	var new_tbody = document.createElement('tbody');
+	old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
+}
+
+document.getElementById("clear-history-btn").addEventListener("click", function(){
+		requestClearingHistoryStorage();
+		clearHistoryTableHTML();
 });
 
+function refreshTable(){
+  clearHistoryTableHTML();
+  initializeStorage();
+}
+
+/* -------------------------------------------------------- */
+
+/*                        MAIN                              */
+
+/* -------------------------------------------------------- */
+
+initializeStorage();
+
+setInterval(refreshTable, 1000);
+/*
+let { setTimeout } = require('sdk/timers');
+function openPopup () {
+	console.log("test");
+}
+setTimeout(openPopup, 3000);*/
