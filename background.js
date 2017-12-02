@@ -7,20 +7,14 @@ async function findDead(error, progress) {
     const ignoredScheme = /^(place|about|javascript|data)\:/i;
 
     let found = 0;
-    let running = 0;
     function work(queue, error, progress) {
-        if (running > 30) {
-            setTimeout(work, 500, queue, error, progress);
-            return;
-        }
+
         if (queue.length == 0) {
             return;
         }
 
-        running++;
         const [url, bookmark] = queue.shift();
 		
-		running--;
 		found++;
         progress(bookmark.id, found);
 
