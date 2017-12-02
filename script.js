@@ -18,8 +18,6 @@ function displayCount(){
 }
 
 function displayNote(timestamp, body) {
-	console.log("hello");
-
 	var tableRef = document.getElementById('history-table').getElementsByTagName('tbody')[0];
 	var newRow = tableRef.insertRow(tableRef.rows.length);
 
@@ -32,16 +30,39 @@ function displayNote(timestamp, body) {
   newCell2.appendChild(newText2);
 }
 
-/* "Main" */
-//count();
-//displayCount();
+function requestClearingHistoryStorage(){
+	browser.runtime.sendMessage({type: "clear_history"});
+}
+
+function clearHistoryTableHTML(){
+	var tableRef = document.getElementById('history-table');
+	while(tableRef.rows.length > 0) {
+  	tableRef.deleteRow(0);
+	}
+}
+
+/* -------------------------------------------------------- */
+
+/*                        MAIN                              */
+
+/* -------------------------------------------------------- */
+
+/*document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('clear-history-btn');
+    btn.addEventListener('click', clearHistory());
+});*/
+
+document.getElementById("clear-history-btn").addEventListener("click", function(){
+    console.log("say hi");
+		//requestClearingHistoryStorage();
+		//clearHistoryTableHTML();
+});
 
 initializeStorage();
 
+/*
 let { setTimeout } = require('sdk/timers');
 function openPopup () {
 	console.log("test");
 }
-setTimeout(openPopup, 3000);
-
-//clearStorage();
+setTimeout(openPopup, 3000);*/

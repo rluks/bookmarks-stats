@@ -44,6 +44,19 @@ function clearStorage(){
 }
 /* -------------------------------------------------------- */
 
+/*           COMMUNCIATION with CONTENT SCRIPT              */
+
+/* -------------------------------------------------------- */
+function onMessage(message, sender, sendResponse) {
+    if (message.type == "clear_history") {
+      clearStorage();
+    }
+}
+
+browser.runtime.onMessage.addListener(onMessage);
+
+/* -------------------------------------------------------- */
+
 /*                        COUNT                             */
 
 /* -------------------------------------------------------- */
@@ -82,7 +95,7 @@ function storeCount(){
 /* -------------------------------------------------------- */
 
 var bookmarksCount = 0;
-var intervalSeconds = 1;
+var intervalSeconds = 10;
 
 count();
 setInterval(count, intervalSeconds * 1000);
