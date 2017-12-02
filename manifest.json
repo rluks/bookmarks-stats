@@ -14,7 +14,7 @@
   },
 
   "browser_action": {
-    "default_title": "404 Bookmarks",
+    "default_title": "Count bookmarks",
 	"default_icon": {
       "16": "icons/page-16.png",
       "32": "icons/page-32.png"
