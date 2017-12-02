@@ -48,22 +48,6 @@ function onMessage(message) {
 browser.runtime.onMessage.addListener(onMessage);
 browser.runtime.sendMessage({type: "find_dead"});
 
-function update(name) {
-    const ctr = document.getElementById(name);
-
-    const selected = ctr.querySelectorAll("input:checked").length;
-    const removal = ctr.querySelector("a.remove");
-    if (selected === 0) {
-        removal.classList.add("disabled");
-        removal.textContent = "Select bookmarks to remove";
-    } else if (selected === 1) {
-        removal.classList.remove("disabled");
-        removal.textContent = "Remove 1 bookmark";
-    } else {
-        removal.classList.remove("disabled");
-        removal.textContent = `Remove ${selected} bookmarks`;
-    }
-}
 
 document.body.addEventListener("click", function(event) {
     const t = event.target;
@@ -86,8 +70,5 @@ document.body.addEventListener("click", function(event) {
         }
         event.preventDefault();
     }
-
-    update("404-errors-ctr");
-    //update("other-errors-ctr");
 });
 
