@@ -1,15 +1,4 @@
-/*function handleAlive({found}) {
-    document.querySelector("#live").textContent = found;
-}*/
-
-/*function onMessage(message) {
-	handleAlive(message);
-}*/
-
-//browser.runtime.onMessage.addListener(onMessage);
-//browser.runtime.sendMessage({type: "find_dead"});
-
-function test(){
+function count(){
 	const ignoredScheme = /^(place|about|javascript|data)\:/i;
 
     browser.bookmarks.search({}).then(bookmarks => {
@@ -28,5 +17,5 @@ function test(){
     });
 }
 
-test();
+count();
 
