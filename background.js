@@ -5,7 +5,10 @@ browser.browserAction.onClicked.addListener(() => {
 });
 
 /* -------------------------------------------------------- */
-/* storage */
+
+/*                        STORAGE                           */
+
+/* -------------------------------------------------------- */
 
 /* generic error handler */
 function onError(error) {
@@ -41,11 +44,9 @@ function clearStorage(){
 }
 /* -------------------------------------------------------- */
 
-
+/*                        COUNT                             */
 
 /* -------------------------------------------------------- */
-
-var bookmarksCount = 0;
 
 function count(){
 	const ignoredScheme = /^(place|about|javascript|data)\:/i;
@@ -76,32 +77,12 @@ function storeCount(){
 
 /* -------------------------------------------------------- */
 
-/*                        MAIN                               */
+/*                        MAIN                              */
 
 /* -------------------------------------------------------- */
 
-
+var bookmarksCount = 0;
+var intervalSeconds = 1;
 
 count();
-
-setInterval(count, 3000);
-
-/*
-let { setTimeout } = require('sdk/timers');
-setTimeout(count, 3000);
-*/
-
-/*
-var event = {
-  notify: function(timer) {
-    count();
-  }
-}
-
-// Create the timer...
-var timer = Components.classes["@mozilla.org/timer;1"]
-    .createInstance(Components.interfaces.nsITimer);
-
-// initialize it to call event.notify() once after exactly ten seconds.
-timer.initWithCallback(event, 10000, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
-*/
+setInterval(count, intervalSeconds * 1000);
