@@ -63,10 +63,14 @@ function clearHistoryTableHTML(){
 }
 
 document.getElementById("clear-history-btn").addEventListener("click", function(){
-    console.log("say hi");
 		requestClearingHistoryStorage();
 		clearHistoryTableHTML();
 });
+
+function refreshTable(){
+  clearHistoryTableHTML();
+  initializeStorage();
+}
 
 /* -------------------------------------------------------- */
 
@@ -76,6 +80,7 @@ document.getElementById("clear-history-btn").addEventListener("click", function(
 
 initializeStorage();
 
+setInterval(refreshTable, 1000);
 /*
 let { setTimeout } = require('sdk/timers');
 function openPopup () {
