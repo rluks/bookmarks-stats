@@ -1,8 +1,8 @@
 {
 
-  "description": "Count bookmarks",
+  "description": "Bookmark statistics",
   "manifest_version": 2,
-  "name": "Count Bookmarks",
+  "name": "Bookmark stats",
   "version": "1.5",
 
   "permissions": [
@@ -14,13 +14,13 @@
   },
 
   "browser_action": {
-    "default_title": "Count bookmarks",
+    "default_title": "Bookmark stats",
 	"default_icon": {
       "16": "icons/page-16.png",
       "32": "icons/page-32.png"
     }
   },
-  
+
     "icons": {
     "48": "icons/border-48.png"
   }

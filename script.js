@@ -17,12 +17,34 @@ function displayCount(){
 	document.querySelector("#counter").textContent = bookmarksCount;
 }
 
+//stupid js
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
+function formatTimestamp(timestamp){
+  var dateObj = new Date(timestamp);
+  var isoDate = dateObj.toISOString();
+
+  var datepart =  isoDate.split('T')[0];
+  var hours = addZero(dateObj.getHours());
+  var minutes =  addZero(dateObj.getMinutes());
+  var seconds =  addZero(dateObj.getSeconds());
+  var timePart = hours + ":" + minutes + ":" + seconds;
+
+  var tmpStr = datepart + " " + timePart;
+  return tmpStr;
+}
+
 function displayNote(timestamp, body) {
 	var tableRef = document.getElementById('history-table').getElementsByTagName('tbody')[0];
 	var newRow = tableRef.insertRow(tableRef.rows.length);
 
 	var newCell  = newRow.insertCell(0);
-	var newText  = document.createTextNode(timestamp);
+	var newText  = document.createTextNode(formatTimestamp(timestamp));
   newCell.appendChild(newText);
 
 	var newCell2  = newRow.insertCell(1);
@@ -40,22 +62,17 @@ function clearHistoryTableHTML(){
 	old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
 }
 
-/* -------------------------------------------------------- */
-
-/*                        MAIN                              */
-
-/* -------------------------------------------------------- */
-
-/*document.addEventListener('DOMContentLoaded', function() {
-    var btn = document.getElementById('clear-history-btn');
-    btn.addEventListener('click', clearHistory());
-});*/
-
 document.getElementById("clear-history-btn").addEventListener("click", function(){
     console.log("say hi");
 		requestClearingHistoryStorage();
 		clearHistoryTableHTML();
 });
+
+/* -------------------------------------------------------- */
+
+/*                        MAIN                              */
+
+/* -------------------------------------------------------- */
 
 initializeStorage();
 
