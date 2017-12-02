@@ -1,4 +1,4 @@
-function handleAlive({id, found}) {
+function handleAlive({found}) {
     document.querySelector("#live").textContent = found;
 }
 

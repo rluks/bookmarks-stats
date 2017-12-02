@@ -15,7 +15,7 @@ async function findDead(error, progress) {
 
             queue.push([url, bookmark]);
         }
-		progress(0, queue.length);
+		progress(queue.length);
     });
 }
 
@@ -23,8 +23,8 @@ function onMessage(message, sender, sendResponse) {
     if (message.type == "find_dead") {
         findDead((bookmark, error) => {
             //browser.tabs.sendMessage(sender.tab.id, {type: "dead", bookmark, error});
-        }, (id, found) => {
-            browser.tabs.sendMessage(sender.tab.id, {type: "alive", id, found}); //msg to script.js
+        }, (found) => {
+            browser.tabs.sendMessage(sender.tab.id, {type: "alive", found}); //msg to script.js
         });
     }
 
