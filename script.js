@@ -35,10 +35,9 @@ function requestClearingHistoryStorage(){
 }
 
 function clearHistoryTableHTML(){
-	var tableRef = document.getElementById('history-table');
-	while(tableRef.rows.length > 0) {
-  	tableRef.deleteRow(0);
-	}
+	var old_tbody = document.getElementById('history-table').getElementsByTagName('tbody')[0];
+	var new_tbody = document.createElement('tbody');
+	old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
 }
 
 /* -------------------------------------------------------- */
@@ -55,7 +54,7 @@ function clearHistoryTableHTML(){
 document.getElementById("clear-history-btn").addEventListener("click", function(){
     console.log("say hi");
 		//requestClearingHistoryStorage();
-		//clearHistoryTableHTML();
+		clearHistoryTableHTML();
 });
 
 initializeStorage();
