@@ -11,9 +11,7 @@ function count(){
 
             queue.push([url, bookmark]);
         }
-		//progress(queue.length);
-		//console.log(queue.length);
-		document.querySelector("#live").textContent = queue.length;
+		document.querySelector("#counter").textContent = queue.length;
     });
 }
 
