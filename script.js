@@ -48,27 +48,3 @@ function onMessage(message) {
 browser.runtime.onMessage.addListener(onMessage);
 browser.runtime.sendMessage({type: "find_dead"});
 
-
-document.body.addEventListener("click", function(event) {
-    const t = event.target;
-    if (t.classList.contains("select-all")) {
-        for (let input of t.parentNode.querySelectorAll("input")) {
-            input.checked = true;
-        }
-        event.preventDefault();
-    } else if (t.classList.contains("remove")) {
-        const toRemove = t.parentNode.querySelectorAll("li > input:checked");
-        if (toRemove.length >= 5) {
-            if (!confirm(`Are you sure you want to remove ${toRemove.length} bookmarks? This operation cannot be undone.`))
-                return;
-        }
-
-        for (let node of toRemove) {
-            node = node.parentNode; // Selected input, but want li.
-            browser.runtime.sendMessage({type: "remove", id: node.id.replace("bookmark-", "")});
-            node.remove();
-        }
-        event.preventDefault();
-    }
-});
-
