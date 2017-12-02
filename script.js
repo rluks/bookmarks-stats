@@ -53,7 +53,7 @@ function clearHistoryTableHTML(){
 
 document.getElementById("clear-history-btn").addEventListener("click", function(){
     console.log("say hi");
-		//requestClearingHistoryStorage();
+		requestClearingHistoryStorage();
 		clearHistoryTableHTML();
 });
 
