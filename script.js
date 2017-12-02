@@ -1,34 +1,24 @@
-var bookmarksCount = 0;
+function onError(error) {
+  console.log(error);
+}
 
-function count(){
-	const ignoredScheme = /^(place|about|javascript|data)\:/i;
-
-    browser.bookmarks.search({}).then(bookmarks => {
-        let queue = [];
-        for (const bookmark of bookmarks) {
-            const url = bookmark.url;
-            if (!url || ignoredScheme.test(url)) {
-                continue;
-            }
-
-            queue.push([url, bookmark]);
-        }
-		bookmarksCount = queue.length;
-		displayCount();
-		storeCount();
-    });
+function initializeStorage() {
+  var gettingAllStorageItems = browser.storage.local.get(null);
+  gettingAllStorageItems.then((results) => {
+    var noteKeys = Object.keys(results);
+    for (let noteKey of noteKeys) {
+      var curValue = results[noteKey];
+      displayNote(noteKey,curValue);
+    }
+  }, onError);
 }
 
 function displayCount(){
 	document.querySelector("#counter").textContent = bookmarksCount;
-	browser.browserAction.setBadgeText({text: bookmarksCount.toString()});
-}
-
-function storeCount(){
-	storeNote(new Date(), bookmarksCount);
 }
 
 function displayNote(timestamp, body) {
+	console.log("hello");
 
 	var tableRef = document.getElementById('history-table').getElementsByTagName('tbody')[0];
 	var newRow = tableRef.insertRow(tableRef.rows.length);
@@ -43,7 +33,8 @@ function displayNote(timestamp, body) {
 }
 
 /* "Main" */
-count();
+//count();
+//displayCount();
 
-//clearStorage();
 initializeStorage();
+//clearStorage();
