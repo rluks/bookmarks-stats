@@ -23,9 +23,17 @@ async function findDead(error, progress) {
 
         running++;
         const [url, bookmark] = queue.shift();
+		
+		//
+		running--;
+		found++;
+        progress(bookmark.id, found);
+		//
+		
         // Can't use HEAD request, because a ton of websites return a 405 error.
         // For example amazon.com or medium.com.
-        fetch(url).then(response => {
+			
+        /*fetch(url).then(response => {
             running--;
 
             if (!response.ok) {
@@ -38,7 +46,7 @@ async function findDead(error, progress) {
         }).catch(exception => {
             running--;
             error(bookmark, exception.toString())
-        });
+        });*/
 
         work(queue, error, progress);
     }

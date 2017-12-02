@@ -88,6 +88,6 @@ document.body.addEventListener("click", function(event) {
     }
 
     update("404-errors-ctr");
-    update("other-errors-ctr");
+    //update("other-errors-ctr");
 });
 
