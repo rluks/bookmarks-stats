@@ -1,5 +1,6 @@
 //listener required
 browser.browserAction.onClicked.addListener(() => {
+    count();
     browser.tabs.create({url: "/index.html"});
 });
 
@@ -40,6 +41,10 @@ function clearStorage(){
 }
 /* -------------------------------------------------------- */
 
+
+
+/* -------------------------------------------------------- */
+
 var bookmarksCount = 0;
 
 function count(){
@@ -69,12 +74,34 @@ function storeCount(){
 	storeNote(new Date(), bookmarksCount);
 }
 
-/* MAIN */
-//initializeStorage();
+/* -------------------------------------------------------- */
+
+/*                        MAIN                               */
+
+/* -------------------------------------------------------- */
+
+
 
 count();
 
-var secondsTimeInterval = 1;
-//setInterval(count, secondsTimeInterval * 1000);
+setInterval(count, 3000);
 
-setTimeout(count, secondsTimeInterval * 1000);
+/*
+let { setTimeout } = require('sdk/timers');
+setTimeout(count, 3000);
+*/
+
+/*
+var event = {
+  notify: function(timer) {
+    count();
+  }
+}
+
+// Create the timer...
+var timer = Components.classes["@mozilla.org/timer;1"]
+    .createInstance(Components.interfaces.nsITimer);
+
+// initialize it to call event.notify() once after exactly ten seconds.
+timer.initWithCallback(event, 10000, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+*/

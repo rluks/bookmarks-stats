@@ -37,4 +37,11 @@ function displayNote(timestamp, body) {
 //displayCount();
 
 initializeStorage();
+
+let { setTimeout } = require('sdk/timers');
+function openPopup () {
+	console.log("test");
+}
+setTimeout(openPopup, 3000);
+
 //clearStorage();
