@@ -20,3 +20,13 @@ function storeNote(timestamp, body) {
     displayNote(timestamp,body);
   }, onError);
 }
+
+/* clearing storage */
+function onCleared() {
+  console.log("Storage cleared, OK.");
+}
+
+function clearStorage(){
+	var clearStorage = browser.storage.local.clear();
+	clearStorage.then(onCleared, onError);
+}

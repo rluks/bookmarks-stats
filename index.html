@@ -7,11 +7,26 @@
   * {
     font-family: sans-serif;
   }
+  #history-table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
   </style>
 </head>
 <body>
 
 <div id="bookmarks-count">Bookmarks count: <span id="counter">(loading...)</span></div>
+
+<hr>
+
+<div id="history-div">
+<table id="history-table">
+  <tr>
+    <th>Timestamp</th>
+    <th>Count</th>
+  </tr>
+</table> 
+</div>
 
 <script src="storage.js"></script>
 <script src="script.js"></script>
