@@ -3,37 +3,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 function handleDead({bookmark, error}) {
-    if (document.getElementById("bookmark-" + bookmark.id))
-        return;
-
-    const li = document.createElement("li")
-    li.id = "bookmark-" + bookmark.id;
-
-    const input = document.createElement("input");
-    input.type = "checkbox";
-    li.append(input)
-
-    li.append(" ")
-
-    const a = document.createElement("a");
-    a.href = bookmark.url;
-    a.textContent = bookmark.title || bookmark.url;
-    a.target = "_blank";
-    li.append(a);
-
-    li.append(` (${error})`);
-
-    const ul = document.getElementById((error === 404) ? "404-errors" : "other-errors");
-    ul.append(li);
+	console.log("DEAD");
 }
 
 function handleAlive({id, found}) {
-    const li = document.getElementById("bookmark-" + id);
-    if (li) {
-        const ul = document.querySelector("ul");
-        ul.removeChild(li);
-    }
-
     document.querySelector("#live").textContent = found;
 }
 
