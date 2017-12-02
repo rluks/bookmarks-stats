@@ -2,29 +2,8 @@ browser.browserAction.onClicked.addListener(() => {
     browser.tabs.create({url: "/index.html"});
 });
 
-
 async function findDead(error, progress) {
     const ignoredScheme = /^(place|about|javascript|data)\:/i;
-
-    let found = 0;
-    function work(queue, error, progress) {
-
-        if (queue.length == 0) {
-            return;
-        }
-
-        const [url, bookmark] = queue.shift();
-		
-		found++;
-        progress(bookmark.id, 0);
-
-		/*if (!response.ok) {
-			error(bookmark, response.status);
-			return;
-		}*/
-
-        work(queue, error, progress);
-    }
 
     browser.bookmarks.search({}).then(bookmarks => {
         let queue = [];
@@ -37,7 +16,6 @@ async function findDead(error, progress) {
             queue.push([url, bookmark]);
         }
 		progress(0, queue.length);
-        //work(queue, error, progress);
     });
 }
 
