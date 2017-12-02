@@ -1,8 +1,8 @@
 {
 
-  "description": "Show and remove expired bookmarks",
+  "description": "Count bookmarks",
   "manifest_version": 2,
-  "name": "404 Bookmarks",
+  "name": "Count Bookmarks",
   "version": "1.5",
 
   "permissions": [
@@ -15,5 +15,9 @@
 
   "browser_action": {
     "default_title": "404 Bookmarks"
+  },
+  
+    "icons": {
+    "48": "icons/border-48.png"
   }
 }
