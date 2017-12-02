@@ -69,8 +69,6 @@ function onMessage(message, sender, sendResponse) {
         }, (id, found) => {
             browser.tabs.sendMessage(sender.tab.id, {type: "alive", id, found});
         });
-    } else if (message.type == "remove") {
-        browser.bookmarks.remove(message.id);
     }
 
     return true;
