@@ -16,7 +16,7 @@ async function findDead(error, progress) {
         const [url, bookmark] = queue.shift();
 		
 		found++;
-        progress(bookmark.id, found);
+        progress(bookmark.id, 0);
 
 		/*if (!response.ok) {
 			error(bookmark, response.status);
@@ -36,8 +36,8 @@ async function findDead(error, progress) {
 
             queue.push([url, bookmark]);
         }
-
-        work(queue, error, progress);
+		progress(0, queue.length);
+        //work(queue, error, progress);
     });
 }
 
