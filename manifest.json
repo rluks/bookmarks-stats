@@ -6,7 +6,7 @@
   "version": "1.5",
 
   "permissions": [
-    "bookmarks", "<all_urls>"
+    "bookmarks", "<all_urls>", "storage"
   ],
 
   "background": {

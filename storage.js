@@ -1,0 +1,22 @@
+/* generic error handler */
+function onError(error) {
+  console.log(error);
+}
+
+function initializeStorage() {
+  var gettingAllStorageItems = browser.storage.local.get(null);
+  gettingAllStorageItems.then((results) => {
+    var noteKeys = Object.keys(results);
+    for (let noteKey of noteKeys) {
+      var curValue = results[noteKey];
+      displayNote(noteKey,curValue);
+    }
+  }, onError);
+}
+
+function storeNote(timestamp, body) {
+  var storingNote = browser.storage.local.set({ [timestamp] : body });
+  storingNote.then(() => {
+    displayNote(timestamp,body);
+  }, onError);
+}
