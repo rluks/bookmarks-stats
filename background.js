@@ -1,3 +1,5 @@
+"use strict";
+
 //listener required
 browser.browserAction.onClicked.addListener(() => {
     count();
@@ -39,8 +41,8 @@ function onCleared() {
 }
 
 function clearStorage(){
-	var clearStorage = browser.storage.local.clear();
-	clearStorage.then(onCleared, onError);
+  var clearStorage = browser.storage.local.clear();
+  clearStorage.then(onCleared, onError);
 }
 /* -------------------------------------------------------- */
 
@@ -50,6 +52,8 @@ function clearStorage(){
 function onMessage(message, sender, sendResponse) {
     if (message.type == "clear_history") {
       clearStorage();
+    }else if (message.type == "get_current_count") {
+        browser.tabs.sendMessage(sender.tab.id, {type: "current_count", bookmarksCount});
     }
 }
 
@@ -62,7 +66,7 @@ browser.runtime.onMessage.addListener(onMessage);
 /* -------------------------------------------------------- */
 
 function count(){
-	const ignoredScheme = /^(place|about|javascript|data)\:/i;
+  const ignoredScheme = /^(place|about|javascript|data)\:/i;
 
     browser.bookmarks.search({}).then(bookmarks => {
         let queue = [];
@@ -74,18 +78,18 @@ function count(){
 
             queue.push([url, bookmark]);
         }
-		bookmarksCount = queue.length;
-		displayCountBadge();
-		storeCount();
+    bookmarksCount = queue.length;
+    displayCountBadge();
+    storeCount();
     });
 }
 
 function displayCountBadge(){
-	browser.browserAction.setBadgeText({text: bookmarksCount.toString()});
+  browser.browserAction.setBadgeText({text: bookmarksCount.toString()});
 }
 
 function storeCount(){
-	storeNote(new Date(), bookmarksCount);
+  storeNote(new Date(), bookmarksCount);
 }
 
 /* -------------------------------------------------------- */

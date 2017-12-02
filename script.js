@@ -1,3 +1,5 @@
+"use strict";
+
 function onError(error) {
   console.log(error);
 }
@@ -11,10 +13,6 @@ function initializeStorage() {
       displayNote(noteKey,curValue);
     }
   }, onError);
-}
-
-function displayCount(){
-	document.querySelector("#counter").textContent = bookmarksCount;
 }
 
 //stupid js
@@ -40,37 +38,56 @@ function formatTimestamp(timestamp){
 }
 
 function displayNote(timestamp, body) {
-	var tableRef = document.getElementById('history-table').getElementsByTagName('tbody')[0];
-	var newRow = tableRef.insertRow(tableRef.rows.length);
+  var tableRef = document.getElementById('history-table').getElementsByTagName('tbody')[0];
+  var newRow = tableRef.insertRow(tableRef.rows.length);
 
-	var newCell  = newRow.insertCell(0);
-	var newText  = document.createTextNode(formatTimestamp(timestamp));
+  var newCell  = newRow.insertCell(0);
+  var newText  = document.createTextNode(formatTimestamp(timestamp));
   newCell.appendChild(newText);
 
-	var newCell2  = newRow.insertCell(1);
-	var newText2  = document.createTextNode(body);
+  var newCell2  = newRow.insertCell(1);
+  var newText2  = document.createTextNode(body);
   newCell2.appendChild(newText2);
 }
 
 function requestClearingHistoryStorage(){
-	browser.runtime.sendMessage({type: "clear_history"});
+  browser.runtime.sendMessage({type: "clear_history"});
 }
 
 function clearHistoryTableHTML(){
-	var old_tbody = document.getElementById('history-table').getElementsByTagName('tbody')[0];
-	var new_tbody = document.createElement('tbody');
-	old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
+  var old_tbody = document.getElementById('history-table').getElementsByTagName('tbody')[0];
+  var new_tbody = document.createElement('tbody');
+  old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
 }
 
 document.getElementById("clear-history-btn").addEventListener("click", function(){
-		requestClearingHistoryStorage();
-		clearHistoryTableHTML();
+    requestClearingHistoryStorage();
+    clearHistoryTableHTML();
 });
 
-function refreshTable(){
+function getCurrentCount(){
+  browser.runtime.sendMessage({type: "get_current_count"});
+}
+
+function refreshData(){
+  getCurrentCount();
   clearHistoryTableHTML();
   initializeStorage();
 }
+
+function updateCurrent(bookmarksCount){
+  document.querySelector("#counter").textContent = bookmarksCount;
+}
+/* -------------------------------------------------------- */
+
+/*          COMMUNCIATION with BACKGROUND SCRIPT            */
+
+/* -------------------------------------------------------- */
+browser.runtime.onMessage.addListener((message) => {
+   if (message.type == "current_count") {
+     updateCurrent(message.bookmarksCount);
+   }
+ });
 
 /* -------------------------------------------------------- */
 
@@ -78,12 +95,7 @@ function refreshTable(){
 
 /* -------------------------------------------------------- */
 
-initializeStorage();
+refreshData();
 
-setInterval(refreshTable, 1000);
-/*
-let { setTimeout } = require('sdk/timers');
-function openPopup () {
-	console.log("test");
-}
-setTimeout(openPopup, 3000);*/
+var intervalSeconds = 10;
+setInterval(refreshData, intervalSeconds * 1000);
