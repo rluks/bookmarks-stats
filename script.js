@@ -110,11 +110,15 @@ setTimeout(createChart, intervalSeconds * 100);
 
 /* -------------------------------------------------------- */
 
-
-var ctx = document.getElementById("myChart").getContext('2d');
-var myLineChart;
-
 function createChart(){
+  var myLineChart;
+  var ctx = document.getElementById("myChart").getContext('2d');
+  var options = {
+    title: {
+      display: true,
+      text: 'Number of bookmarks'
+    }
+  };
   myLineChart = new Chart(ctx, {
                   type: 'line',
                   data: {
@@ -127,11 +131,6 @@ function createChart(){
                         }
                       ]
                     },
-                    options: {
-                      title: {
-                        display: true,
-                        text: 'Number of bookmarks'
-                      }
-                    }
+                    options: options
                 });
 }
