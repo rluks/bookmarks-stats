@@ -4,7 +4,7 @@ function onError(error) {
   console.log(error);
 }
 
-var countArray = [];
+var bookmarksCountData = [];
 
 function initializeStorage() {
   var gettingAllStorageItems = browser.storage.local.get(null);
@@ -13,7 +13,7 @@ function initializeStorage() {
     for (let noteKey of noteKeys) {
       var curValue = results[noteKey];
       displayNote(noteKey,curValue);
-      countArray.push(curValue);
+      bookmarksCountData.push(noteKey,curValue);
     }
   }, onError);
 }
@@ -118,9 +118,9 @@ function createChart(){
   myLineChart = new Chart(ctx, {
                   type: 'line',
                   data: {
-                      labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+                      labels: Object.keys(bookmarksCountData),
                       datasets: [{
-                          data: countArray,
+                          data: Object.values(bookmarksCountData),
                           label: "Count",
                           borderColor: "#3e95cd",
                           fill: false
