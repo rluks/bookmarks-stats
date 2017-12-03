@@ -4,7 +4,7 @@ function onError(error) {
   console.log(error);
 }
 
-var bookmarksCountData = [];
+var bookmarksCountData = {};
 
 function initializeStorage() {
   var gettingAllStorageItems = browser.storage.local.get(null);
@@ -13,7 +13,7 @@ function initializeStorage() {
     for (let noteKey of noteKeys) {
       var curValue = results[noteKey];
       displayNote(noteKey,curValue);
-      bookmarksCountData.push(noteKey,curValue);
+      bookmarksCountData[noteKey] = curValue;
     }
   }, onError);
 }
@@ -113,10 +113,42 @@ setTimeout(createChart, intervalSeconds * 100);
 function createChart(){
   var myLineChart;
   var ctx = document.getElementById("myChart").getContext('2d');
+
+  var minimumDatetime;
+  for (var prop in bookmarksCountData) {
+      minimumDatetime = prop;
+      break;
+  }
+
   var options = {
     title: {
       display: true,
       text: 'Number of bookmarks'
+    },
+    scales: {
+    xAxes: [{
+      type: "time",
+            time: {
+              unit: 'minutes',
+              unitStepSize: 0.5,
+              round: 'minutes',
+              tooltipFormat: "h:mm:ss a",
+              displayFormats: {
+                hour: 'MMM D, h:mm A'
+              }
+            },
+            ticks: {
+              min: minimumDatetime,
+              max: new Date(),
+            }
+    }],
+    yAxes: [{
+      ticks: {
+        min: 3500,
+        max: 5200,
+        stepSize: 500
+      }
+    }]
     }
   };
   myLineChart = new Chart(ctx, {
