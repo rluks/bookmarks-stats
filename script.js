@@ -114,11 +114,7 @@ function createChart(){
   var myLineChart;
   var ctx = document.getElementById("myChart").getContext('2d');
 
-  var minimumDatetime;
-  for (var prop in bookmarksCountData) {
-      minimumDatetime = prop;
-      break;
-  }
+  var minimumDatetime = bookmarksCountData[Object.keys(bookmarksCountData)[0]];
 
   var options = {
     title: {
