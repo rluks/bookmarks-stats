@@ -4,6 +4,8 @@ function onError(error) {
   console.log(error);
 }
 
+var countArray = [];
+
 function initializeStorage() {
   var gettingAllStorageItems = browser.storage.local.get(null);
   gettingAllStorageItems.then((results) => {
@@ -11,6 +13,7 @@ function initializeStorage() {
     for (let noteKey of noteKeys) {
       var curValue = results[noteKey];
       displayNote(noteKey,curValue);
+      countArray.push(curValue);
     }
   }, onError);
 }
@@ -99,3 +102,36 @@ refreshData();
 
 var intervalSeconds = 10;
 setInterval(refreshData, intervalSeconds * 1000);
+setTimeout(createChart, intervalSeconds * 100);
+
+/* -------------------------------------------------------- */
+
+/*                        Chart                              */
+
+/* -------------------------------------------------------- */
+
+
+var ctx = document.getElementById("myChart").getContext('2d');
+var myLineChart;
+
+function createChart(){
+  myLineChart = new Chart(ctx, {
+                  type: 'line',
+                  data: {
+                      labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+                      datasets: [{
+                          data: countArray,
+                          label: "Count",
+                          borderColor: "#3e95cd",
+                          fill: false
+                        }
+                      ]
+                    },
+                    options: {
+                      title: {
+                        display: true,
+                        text: 'Number of bookmarks'
+                      }
+                    }
+                });
+}
