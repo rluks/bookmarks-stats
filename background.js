@@ -92,6 +92,15 @@ function storeCount(){
   storeNote(new Date(), bookmarksCount);
 }
 
+function onBookmarkCreated(id, bookmarkInfo) {
+    count();
+}
+
+function onBookmarkRemoved(id, removeInfo) {
+    count();
+}
+
+
 /* -------------------------------------------------------- */
 
 /*                        MAIN                              */
@@ -99,7 +108,10 @@ function storeCount(){
 /* -------------------------------------------------------- */
 
 var bookmarksCount = 0;
-var intervalSeconds = 10;
+//var intervalSeconds = 10;
 
 count();
-setInterval(count, intervalSeconds * 1000);
+//setInterval(count, intervalSeconds * 1000);
+
+browser.bookmarks.onCreated.addListener(onBookmarkCreated);
+browser.bookmarks.onRemoved.addListener(onBookmarkRemoved)
