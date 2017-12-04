@@ -108,10 +108,8 @@ function onBookmarkRemoved(id, removeInfo) {
 /* -------------------------------------------------------- */
 
 var bookmarksCount = 0;
-//var intervalSeconds = 10;
 
 count();
-//setInterval(count, intervalSeconds * 1000);
 
 browser.bookmarks.onCreated.addListener(onBookmarkCreated);
 browser.bookmarks.onRemoved.addListener(onBookmarkRemoved)
