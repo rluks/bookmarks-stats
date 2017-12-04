@@ -79,7 +79,7 @@ function refreshData(){
 }
 
 function updateCurrent(bookmarksCount){
-  document.querySelector("#counter").textContent = bookmarksCount;
+  document.querySelector('#counter').textContent = bookmarksCount;
 }
 /* -------------------------------------------------------- */
 
@@ -112,7 +112,7 @@ setTimeout(createChart, intervalSeconds * 100);
 
 function createChart(){
   var myLineChart;
-  var ctx = document.getElementById("myChart").getContext('2d');
+  var ctx = document.getElementById('myChart').getContext('2d');
 
   var minimumDatetime = bookmarksCountData[Object.keys(bookmarksCountData)[0]];
 
