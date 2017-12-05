@@ -178,6 +178,7 @@ function createChart () {
       datasets: [{
         data: Object.values(bookmarksCountData),
         label: 'Count',
+        lineTension: 0.05,
         borderColor: '#3e95cd',
         fill: false
       }
