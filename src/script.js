@@ -110,10 +110,18 @@ setTimeout(createChart, intervalSeconds * 100);
 
 /* -------------------------------------------------------- */
 
+/* find minimum in array */
+Array.min = function( array ){
+    return Math.min.apply( Math, array );
+};
+
 function createChart () {
   var ctx = document.getElementById('myChart').getContext('2d');
 
-  var minimumDatetime = bookmarksCountData[Object.keys(bookmarksCountData)[0]];
+  let minimumDatetime = bookmarksCountData[Object.keys(bookmarksCountData)[0]];//first record
+  let minimumCount = Array.min(Object.values(bookmarksCountData));
+  let chartMin = minimumCount - (10*minimumCount/100);
+  chartMin = (chartMin < 0) ? 0 : chartMin;
 
   var options = {
     title: {
@@ -139,9 +147,9 @@ function createChart () {
       }],
       yAxes: [{
         ticks: {
-          min: 0,
+          min: chartMin,
           max: 100,
-          stepSize: 1
+          stepSize: 5
         }
       }]
     }
