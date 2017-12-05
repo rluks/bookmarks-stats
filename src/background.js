@@ -109,6 +109,21 @@ function onBookmarkRemoved(id, removeInfo) {
 
 var bookmarksCount = 0;
 
+function generateTestingBookmark(number) {
+    var createBookmark = browser.bookmarks.create({
+        title: "bookmark" + number,
+        url: 'https://www.example.org'
+    });
+}
+
+function generateTestingData() {
+    for (var i = 0; i < 10; i++) {
+        generateTestingBookmark(i);
+    }
+}
+
+generateTestingData();
+
 count();
 
 browser.bookmarks.onCreated.addListener(onBookmarkCreated);
