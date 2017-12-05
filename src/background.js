@@ -117,7 +117,7 @@ function generateTestingBookmark(number) {
 }
 
 function generateTestingData() {
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 500; i++) {
         generateTestingBookmark(i);
     }
 }

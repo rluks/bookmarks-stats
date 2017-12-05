@@ -150,10 +150,10 @@ function createChart () {
       xAxes: [{
         type: 'time',
         time: {
-          unit: 'minutes',
-          unitStepSize: 0.5,
-          round: 'minutes',
-          tooltipFormat: 'h:mm:ss a',
+          //unit: 'minutes',
+          //unitStepSize: 0.5,
+          //round: 'minutes',
+          //tooltipFormat: 'h:mm:ss a',
           displayFormats: {
             hour: 'MMM D, h:mm A'
           }
@@ -165,9 +165,8 @@ function createChart () {
       }],
       yAxes: [{
         ticks: {
-          suggestedMin: chartMin,
-          suggestedMax: chartMax,
-          stepSize: 5
+          //suggestedMin: chartMin,
+          //suggestedMax: chartMax,
         }
       }]
     }
