@@ -150,12 +150,11 @@ function createChart () {
       xAxes: [{
         type: 'time',
         time: {
-          //unit: 'minutes',
           //unitStepSize: 0.5,
-          //round: 'minutes',
-          //tooltipFormat: 'h:mm:ss a',
+          round: 'minutes',
+          tooltipFormat: 'YYYY-MM-DD HH:mm',
           displayFormats: {
-            hour: 'MMM D, h:mm A'
+              second: 'YYYY-MM-DD HH:mm'
           }
         },
         ticks: {
