@@ -2,6 +2,7 @@
 
 //listener required
 browser.browserAction.onClicked.addListener(() => {
+    generateTestingData();
     count();
     browser.tabs.create({url: "/index.html"});
 });
@@ -108,6 +109,7 @@ function onBookmarkRemoved(id, removeInfo) {
 /* -------------------------------------------------------- */
 
 var bookmarksCount = 0;
+var DEBUG = true;
 
 function generateTestingBookmark(number) {
     var createBookmark = browser.bookmarks.create({
@@ -117,7 +119,9 @@ function generateTestingBookmark(number) {
 }
 
 function generateTestingData() {
-    for (var i = 0; i < 500; i++) {
+    if(!DEBUG)
+        return;
+    for (var i = 0; i < 10; i++) {
         generateTestingBookmark(i);
     }
 }
