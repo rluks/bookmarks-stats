@@ -94,6 +94,24 @@ browser.runtime.onMessage.addListener((message) => {
 
 /* -------------------------------------------------------- */
 
+/*                        Math                              */
+
+/* -------------------------------------------------------- */
+
+/* find minimum in array */
+Array.min = function( array ){
+    return Math.min.apply( Math, array );
+};
+
+Array.max = function( array ){
+    return Math.max.apply( Math, array );
+};
+
+/* rounding */
+function toInt(n){ return Math.round(Number(n)); };
+
+/* -------------------------------------------------------- */
+
 /*                        MAIN                              */
 
 /* -------------------------------------------------------- */
@@ -110,18 +128,18 @@ setTimeout(createChart, intervalSeconds * 100);
 
 /* -------------------------------------------------------- */
 
-/* find minimum in array */
-Array.min = function( array ){
-    return Math.min.apply( Math, array );
-};
-
 function createChart () {
   var ctx = document.getElementById('myChart').getContext('2d');
 
   let minimumDatetime = bookmarksCountData[Object.keys(bookmarksCountData)[0]];//first record
   let minimumCount = Array.min(Object.values(bookmarksCountData));
-  let chartMin = minimumCount - (10*minimumCount/100);
+  let chartMin = minimumCount - (10*minimumCount/100);//10%
   chartMin = (chartMin < 0) ? 0 : chartMin;
+  chartMin = toInt(chartMin);
+
+  let maximumCount = Array.max(Object.values(bookmarksCountData));
+  let chartMax = maximumCount + (10*maximumCount/100);//10%
+  chartMax = toInt(chartMax);
 
   var options = {
     title: {
@@ -147,8 +165,8 @@ function createChart () {
       }],
       yAxes: [{
         ticks: {
-          min: chartMin,
-          max: 100,
+          suggestedMin: chartMin,
+          suggestedMax: chartMax,
           stepSize: 5
         }
       }]
