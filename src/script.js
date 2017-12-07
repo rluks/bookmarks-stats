@@ -181,6 +181,13 @@ function createChart () {
         ticks: {
           //suggestedMin: chartMin,
           //suggestedMax: chartMax,
+          userCallback: function(label, index, labels) { // <-- hack for rounding the number
+              // when the floored value is the same as the value we have a whole number
+              if (Math.floor(label) === label) {
+                  return label;
+              }
+
+          },
         }
       }]
     }
