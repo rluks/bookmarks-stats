@@ -11,25 +11,33 @@
     border: 1px solid black;
     border-collapse: collapse;
     padding: 7px;
+    margin: 0 auto;
   }
+  .center {
+    margin: auto;
+    width: 90%;
+    padding: 10px;
+    text-align: center;
+}
   </style>
 </head>
 <body>
-
-<div id="bookmarks-count">Bookmarks count: <span id="counter">(loading...)</span></div>
-
-<hr>
-
-<button id=clear-history-btn>Clear stats history</button>
-<br>
+<div id="content" class="center">
+<div id="bookmarks-count" class="center">Bookmarks count: <span id="counter">(loading...)</span></div>
 
 <hr>
 
-<div id="chart" style="width:500px; height:500px;">
-<canvas id="myChart" width="200" height="200"></canvas>
+<div id="chart" class="center" style="width:500px; height:500px;">
+  <canvas id="myChart" width="200" height="200"></canvas>
 </div>
 
-<div id="history-div">
+<hr>
+
+<div class="center">
+  <button id=clear-history-btn>Clear stats history</button>
+</div>
+
+<div id="history-div" class="center">
 <table id="history-table">
   <thead>
   <tr>
@@ -42,6 +50,7 @@
 </table>
 </div>
 
+</div>
 <script src="moment-with-locales.js"></script>
 <script src="Chart.js"></script>
 <script src="script.js"></script>
