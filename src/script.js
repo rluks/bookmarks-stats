@@ -128,8 +128,23 @@ setTimeout(createChart, intervalSeconds * 100);
 
 /* -------------------------------------------------------- */
 
+function createCanvas(){
+  var canvasDiv = document.getElementById('chart');
+  var width = canvasDiv.offsetWidth;
+
+  var canvas = document.createElement('canvas');
+  canvas.id = "CursorLayer";
+  canvas.width = width;
+  canvas.height = 450;
+
+  canvasDiv.appendChild(canvas);
+
+  return canvas;
+}
+
 function createChart () {
-  var ctx = document.getElementById('myChart').getContext('2d');
+  var sketchCanvas = createCanvas();
+  var ctx = sketchCanvas.getContext('2d');
 
   let minimumDatetime = bookmarksCountData[Object.keys(bookmarksCountData)[0]];//first record
   let minimumCount = Array.min(Object.values(bookmarksCountData));
