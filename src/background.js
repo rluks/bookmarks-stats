@@ -2,7 +2,7 @@
 
 //listener required
 browser.browserAction.onClicked.addListener(() => {
-    generateTestingData();
+    //generateTestingData();
     count();
     browser.tabs.create({url: "/index.html"});
 });
@@ -17,17 +17,6 @@ browser.browserAction.onClicked.addListener(() => {
 function onError(error) {
   console.log(error);
 }
-
-/*function initializeStorage() {
-  var gettingAllStorageItems = browser.storage.local.get(null);
-  gettingAllStorageItems.then((results) => {
-    var noteKeys = Object.keys(results);
-    for (let noteKey of noteKeys) {
-      var curValue = results[noteKey];
-      displayNote(noteKey,curValue);
-    }
-  }, onError);
-}*/
 
 function storeNote(timestamp, body) {
   var storingNote = browser.storage.local.set({ [timestamp] : body });
@@ -101,6 +90,18 @@ function onBookmarkRemoved(id, removeInfo) {
     count();
 }
 
+/* -------------------------------------------------------- */
+
+/*                        Math                              */
+
+/* -------------------------------------------------------- */
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
+
 
 /* -------------------------------------------------------- */
 
@@ -114,21 +115,39 @@ var DEBUG = true;
 function generateTestingBookmark(number) {
     var createBookmark = browser.bookmarks.create({
         title: "bookmark" + number,
-        url: 'https://www.example.org'
+        url: "https://www.example.org"
     });
 }
 
-function generateTestingData() {
+function generateTestingBookmarks() {
     if(!DEBUG)
         return;
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 3; i++) {
         generateTestingBookmark(i);
     }
 }
 
-generateTestingData();
+function generateInitialZeroCount(){
+    let minuteOld = new Date();
+    minuteOld.setSeconds(minuteOld.getSeconds() - 60);
+    storeNote(minuteOld, 0);
+}
 
+function generateFakeHistory(){
+    if(!DEBUG)
+        return;
+    for(let i = 600; i > 0; i -= 30){
+        let minuteOld = new Date();
+        minuteOld.setSeconds(minuteOld.getSeconds() - i);
+        storeNote(minuteOld, getRandomInt(0, 100));
+    }
+}
+
+//generateTestingBookmarks();
+//generateInitialZeroCount();
+
+generateFakeHistory();
 count();
 
 browser.bookmarks.onCreated.addListener(onBookmarkCreated);
-browser.bookmarks.onRemoved.addListener(onBookmarkRemoved)
+browser.bookmarks.onRemoved.addListener(onBookmarkRemoved);
