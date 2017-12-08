@@ -2,7 +2,7 @@
 
 //listener required
 browser.browserAction.onClicked.addListener(() => {
-    //generateTestingData();
+    generateTestingBookmarks();
     count();
     browser.tabs.create({url: "/index.html"});
 });
