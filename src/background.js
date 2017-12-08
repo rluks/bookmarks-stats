@@ -1,6 +1,9 @@
 "use strict";
 
-var bounceDelay = 250; //ms
+var DEBUG = true;
+
+const bounceDelay = 250; //ms
+var bookmarksCount = 0;
 
 //listener required
 browser.browserAction.onClicked.addListener(() => {
@@ -75,8 +78,7 @@ function onBookmarkRemoved(id, removeInfo) {
 
 /* -------------------------------------------------------- */
 
-var bookmarksCount = 0;
-var DEBUG = false;
+
 
 function generateTestingBookmark(number) {
     var createBookmark = browser.bookmarks.create({
