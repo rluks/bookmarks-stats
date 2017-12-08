@@ -1,9 +1,15 @@
 "use strict";
 
+var bounceDelay = 250; //ms
+
 //listener required
 browser.browserAction.onClicked.addListener(() => {
     generateTestingBookmarks();
-    count();
+
+    _.debounce(countBookmarks, bounceDelay, {'leading': true,
+        'trailing': true}
+    );
+
     browser.tabs.create({url: "/index.html"});
 });
 
@@ -55,7 +61,7 @@ browser.runtime.onMessage.addListener(onMessage);
 
 /* -------------------------------------------------------- */
 
-function count(){
+function countBookmarks(){
   const ignoredScheme = /^(place|about|javascript|data)\:/i;
 
     browser.bookmarks.search({}).then(bookmarks => {
@@ -83,15 +89,11 @@ function storeCount(){
 }
 
 function onBookmarkCreated(id, bookmarkInfo) {
-    browser.bookmarks.onCreated.removeListener(onBookmarkCreated);
-    count();
-    browser.bookmarks.onCreated.addListener(onBookmarkCreated);
+    countBookmarks();
 }
 
 function onBookmarkRemoved(id, removeInfo) {
-    browser.bookmarks.onRemoved.removeListener(onBookmarkRemoved);
-    count();
-    browser.bookmarks.onRemoved.addListener(onBookmarkRemoved);
+    countBookmarks();
 }
 
 /* -------------------------------------------------------- */
@@ -151,7 +153,11 @@ function generateFakeHistory(){
 //generateInitialZeroCount();
 
 generateFakeHistory();
-count();
+countBookmarks();
 
-browser.bookmarks.onCreated.addListener(onBookmarkCreated);
-browser.bookmarks.onRemoved.addListener(onBookmarkRemoved);
+browser.bookmarks.onCreated.addListener(_.debounce(onBookmarkCreated, bounceDelay, {'leading': true,
+    'trailing': true}
+));
+browser.bookmarks.onRemoved.addListener(_.debounce(onBookmarkRemoved, bounceDelay, {'leading': true,
+    'trailing': true}
+));
