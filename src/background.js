@@ -83,11 +83,15 @@ function storeCount(){
 }
 
 function onBookmarkCreated(id, bookmarkInfo) {
+    browser.bookmarks.onCreated.removeListener(onBookmarkCreated);
     count();
+    browser.bookmarks.onCreated.addListener(onBookmarkCreated);
 }
 
 function onBookmarkRemoved(id, removeInfo) {
+    browser.bookmarks.onRemoved.removeListener(onBookmarkRemoved);
     count();
+    browser.bookmarks.onRemoved.addListener(onBookmarkRemoved);
 }
 
 /* -------------------------------------------------------- */
