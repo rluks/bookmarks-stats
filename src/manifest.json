@@ -12,8 +12,9 @@
   "background": {
     "scripts": [
       "lib/Debounce.js",
-      "math.js",
       "tests.js",
+      "bookmarks.js",
+      "math.js",
       "storage.js",
       "background.js"
     ]

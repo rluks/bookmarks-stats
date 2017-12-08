@@ -1,8 +1,9 @@
 "use strict";
 
-var DEBUG = true;
+const DEBUG = true;
 
 const bounceDelay = 250; //ms
+
 var bookmarksCount = 0;
 
 /* -------------------------------------------------------- */
@@ -33,39 +34,8 @@ function onMessage(message, sender, sendResponse) {
     }
 }
 
-browser.runtime.onMessage.addListener(onMessage);
-
-/* -------------------------------------------------------- */
-
-/*                        COUNT                             */
-
-/* -------------------------------------------------------- */
-
-function countBookmarks(){
-  const ignoredScheme = /^(place|about|javascript|data)\:/i;
-
-    browser.bookmarks.search({}).then(bookmarks => {
-        let queue = [];
-        for (const bookmark of bookmarks) {
-            const url = bookmark.url;
-            if (!url || ignoredScheme.test(url)) {
-                continue;
-            }
-
-            queue.push([url, bookmark]);
-        }
-    bookmarksCount = queue.length;
-    displayCountBadge();
-    storeCount();
-    });
-}
-
 function displayCountBadge(){
   browser.browserAction.setBadgeText({text: bookmarksCount.toString()});
-}
-
-function storeCount(){
-  storeNote(new Date(), bookmarksCount);
 }
 
 function onBookmarkCreated(id, bookmarkInfo) {
@@ -76,17 +46,19 @@ function onBookmarkRemoved(id, removeInfo) {
     countBookmarks();
 }
 
+function generateInitialZeroCount(){
+    let minuteOld = new Date();
+    minuteOld.setSeconds(minuteOld.getSeconds() - 60);
+    storeNote(minuteOld, 0);
+}
+
 /* -------------------------------------------------------- */
 
 /*                        MAIN                              */
 
 /* -------------------------------------------------------- */
 
-function generateInitialZeroCount(){
-    let minuteOld = new Date();
-    minuteOld.setSeconds(minuteOld.getSeconds() - 60);
-    storeNote(minuteOld, 0);
-}
+browser.runtime.onMessage.addListener(onMessage);
 
 generateFakeHistory();
 countBookmarks();

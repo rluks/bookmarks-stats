@@ -20,3 +20,7 @@ function clearStorage(){
     var clearStorage = browser.storage.local.clear();
     clearStorage.then(onCleared, onError);
 }
+
+function storeCount(){
+    storeNote(new Date(), bookmarksCount);
+}
