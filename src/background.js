@@ -5,7 +5,11 @@ var DEBUG = true;
 const bounceDelay = 250; //ms
 var bookmarksCount = 0;
 
-//listener required
+/* -------------------------------------------------------- */
+
+/*                  Toolbar icon action                     */
+
+/* -------------------------------------------------------- */
 browser.browserAction.onClicked.addListener(() => {
     generateTestingBookmarks();
 
@@ -78,41 +82,11 @@ function onBookmarkRemoved(id, removeInfo) {
 
 /* -------------------------------------------------------- */
 
-
-
-function generateTestingBookmark(number) {
-    var createBookmark = browser.bookmarks.create({
-        title: "bookmark" + number,
-        url: "https://www.example.org"
-    });
-}
-
-function generateTestingBookmarks() {
-    if(!DEBUG)
-        return;
-    for (var i = 0; i < 3; i++) {
-        generateTestingBookmark(i);
-    }
-}
-
 function generateInitialZeroCount(){
     let minuteOld = new Date();
     minuteOld.setSeconds(minuteOld.getSeconds() - 60);
     storeNote(minuteOld, 0);
 }
-
-function generateFakeHistory(){
-    if(!DEBUG)
-        return;
-    for(let i = 600; i > 0; i -= 30){
-        let minuteOld = new Date();
-        minuteOld.setSeconds(minuteOld.getSeconds() - i);
-        storeNote(minuteOld, getRandomInt(0, 100));
-    }
-}
-
-//generateTestingBookmarks();
-//generateInitialZeroCount();
 
 generateFakeHistory();
 countBookmarks();

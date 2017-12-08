@@ -13,6 +13,7 @@
     "scripts": [
       "lib/Debounce.js",
       "math.js",
+      "tests.js",
       "storage.js",
       "background.js"
     ]
