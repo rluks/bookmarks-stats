@@ -114,7 +114,7 @@ function getRandomInt(min, max) {
 /* -------------------------------------------------------- */
 
 var bookmarksCount = 0;
-var DEBUG = true;
+var DEBUG = false;
 
 function generateTestingBookmark(number) {
     var createBookmark = browser.bookmarks.create({
