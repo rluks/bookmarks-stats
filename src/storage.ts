@@ -29,7 +29,7 @@ function loadHistory () {
   gettingAllStorageItems.then((results) => {
     var noteKeys = Object.keys(results);
     for (let noteKey of noteKeys) {
-      bookmarksCountData[noteKey] = results[noteKey];
+      historyData[noteKey] = results[noteKey];
     }
   }, onStorageError);
 }

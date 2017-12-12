@@ -33,8 +33,9 @@ function onMessage(message, sender, sendResponse) {
         browser.tabs.sendMessage(sender.tab.id, {type: "current_count", bookmarksCount});
     }
     else if (message.type == "download_history") {
-        initializeStorage ();
-        browser.tabs.sendMessage(sender.tab.id, {type: "history_data", bookmarksCountData});
+        loadHistory ();
+        var data;
+        browser.tabs.sendMessage(sender.tab.id, {type: "history_data", data});
     }
 }
 
