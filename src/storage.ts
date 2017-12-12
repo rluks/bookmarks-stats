@@ -1,19 +1,12 @@
 
-/* generic error handler */
-function onError(error) {
-    console.log(error);
-}
-
 function onStorageError (error) {
   console.log(error);
 }
 
-
 function storeNote(timestamp, body) {
     var storingNote = browser.storage.local.set({ [timestamp] : body });
     storingNote.then(() => {
-        //displayNote(timestamp,body);
-    }, onError);
+    }, onStorageError);
 }
 
 /* clearing storage */
@@ -23,7 +16,7 @@ function onCleared() {
 
 function clearStorage(){
     var clearStorage = browser.storage.local.clear();
-    clearStorage.then(onCleared, onError);
+    clearStorage.then(onCleared, onStorageError);
 }
 
 function storeCount(){
