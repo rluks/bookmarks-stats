@@ -3,15 +3,18 @@ function onStorageError (error) {
   console.log(error);
 }
 
+function onCleared() {
+    console.log("Storage cleared, OK.");
+}
+
 function storeNote(timestamp, body) {
     var storingNote = browser.storage.local.set({ [timestamp] : body });
     storingNote.then(() => {
     }, onStorageError);
 }
 
-/* clearing storage */
-function onCleared() {
-    console.log("Storage cleared, OK.");
+function storeCount(){
+    storeNote(new Date(), bookmarksCount);
 }
 
 function clearStorage(){
@@ -19,9 +22,6 @@ function clearStorage(){
     clearStorage.then(onCleared, onStorageError);
 }
 
-function storeCount(){
-    storeNote(new Date(), bookmarksCount);
-}
 
 function loadHistory () {
   var historyData = {};
