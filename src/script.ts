@@ -4,19 +4,7 @@ function onStorageError (error) {
   console.log(error);
 }
 
-var bookmarksCountData = {};
 
-function initializeStorage () {
-  var gettingAllStorageItems = browser.storage.local.get(null);
-  gettingAllStorageItems.then((results) => {
-    var noteKeys = Object.keys(results);
-    for (let noteKey of noteKeys) {
-      var curValue = results[noteKey];
-      displayNote(noteKey, curValue);
-      bookmarksCountData[noteKey] = curValue;
-    }
-  }, onStorageError);
-}
 
 //  stupid js
 function addZero (i) {
@@ -75,8 +63,13 @@ function getCurrentCount () {
 function refreshData () {
   getCurrentCount();
   clearHistoryTableHTML();
-  initializeStorage();
+  //initializeStorage();
 }
+
+function downloadHistory(){
+  browser.runtime.sendMessage({type: 'download_history'});
+}
+
 
 function updateCurrent (bookmarksCount) {
   document.querySelector('#counter').textContent = bookmarksCount;
@@ -89,6 +82,9 @@ function updateCurrent (bookmarksCount) {
 browser.runtime.onMessage.addListener((message) => {
   if (message.type === 'current_count') {
     updateCurrent(message.bookmarksCount);
+  }
+  else if (message.type === 'history_data') {
+    testDownload(message.bookmarksCountData);
   }
 });
 
@@ -119,7 +115,7 @@ setTimeout(createChart, intervalSeconds * 100);
 
 
 document.getElementById('download-history-btn').addEventListener('click', function () {
-  testDownload();
+  downloadHistory();
 });
 
 /* -------------------------------------------------------- */

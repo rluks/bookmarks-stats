@@ -11,9 +11,9 @@ function download(filename, data) {
   document.body.removeChild(element);
 }
 
-function testDownload(){
+function testDownload(data){
   var filename = "myjson.json";
-  var data = {"widget": {
+  /*var data = {"widget": {
               "debug": "on",
               "window": {
                   "title": "Sample Konfabulator Widget",
@@ -38,6 +38,6 @@ function testDownload(){
                   "alignment": "center",
                   "onMouseUp": "sun1.opacity = (sun1.opacity / 100) * 90;"
               }
-            }};
+            }};*/
   download(filename, JSON.stringify(data));
 }
