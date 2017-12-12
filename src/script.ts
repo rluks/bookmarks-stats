@@ -1,6 +1,6 @@
 "use strict";
 
-function onError (error) {
+function onStorageError (error) {
   console.log(error);
 }
 
@@ -15,7 +15,7 @@ function initializeStorage () {
       displayNote(noteKey, curValue);
       bookmarksCountData[noteKey] = curValue;
     }
-  }, onError);
+  }, onStorageError);
 }
 
 //  stupid js
@@ -121,6 +121,11 @@ refreshData();
 var intervalSeconds = 10;
 setInterval(refreshData, intervalSeconds * 1000);
 setTimeout(createChart, intervalSeconds * 100);
+
+
+document.getElementById('download-history-btn').addEventListener('click', function () {
+  testDownload();
+});
 
 /* -------------------------------------------------------- */
 
