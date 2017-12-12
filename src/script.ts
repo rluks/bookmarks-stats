@@ -1,11 +1,5 @@
 "use strict";
 
-function onStorageError (error) {
-  console.log(error);
-}
-
-
-
 //  stupid js
 function addZero (i) {
   if (i < 10) {
