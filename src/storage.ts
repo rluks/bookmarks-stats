@@ -23,7 +23,7 @@ function storeCount(){
     storeNote(new Date(), bookmarksCount);
 }
 
-function initializeStorage () {
+function loadHistory () {
   var historyData = {};
   var gettingAllStorageItems = browser.storage.local.get(null);
   gettingAllStorageItems.then((results) => {
