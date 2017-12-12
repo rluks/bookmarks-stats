@@ -33,9 +33,7 @@ function onMessage(message, sender, sendResponse) {
         browser.tabs.sendMessage(sender.tab.id, {type: "current_count", bookmarksCount});
     }
     else if (message.type == "download_history") {
-        loadHistory ();
-        var data;
-        browser.tabs.sendMessage(sender.tab.id, {type: "history_data", data});
+          browser.tabs.sendMessage(sender.tab.id, {type: "history_data", historyData});
     }
 }
 
@@ -67,6 +65,9 @@ browser.runtime.onMessage.addListener(onMessage);
 
 generateFakeHistory();
 countBookmarks();
+
+var historyData;
+loadHistory ();
 
 browser.bookmarks.onCreated.addListener(_.debounce(onBookmarkCreated, bounceDelay, {'leading': true,
     'trailing': true}

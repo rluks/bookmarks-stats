@@ -22,14 +22,16 @@ function clearStorage(){
     clearStorage.then(onCleared, onStorageError);
 }
 
-
-function loadHistory () {
-  var historyData = {};
-  var gettingAllStorageItems = browser.storage.local.get(null);
-  gettingAllStorageItems.then((results) => {
+function onStorageItems (results) {
+    var historyDataTmp = {};
     var noteKeys = Object.keys(results);
     for (let noteKey of noteKeys) {
-      historyData[noteKey] = results[noteKey];
+      historyDataTmp[noteKey] = results[noteKey];
     }
-  }, onStorageError);
+
+    historyData= historyDataTmp;
+}
+
+function loadHistory () {
+  browser.storage.local.get(null).then(onStorageItems, onStorageError);
 }

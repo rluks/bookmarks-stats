@@ -78,7 +78,7 @@ browser.runtime.onMessage.addListener((message) => {
     updateCurrent(message.bookmarksCount);
   }
   else if (message.type === 'history_data') {
-    testDownload(message.bookmarksCountData);
+    testDownload(message.historyData);
   }
 });
 
