@@ -23,3 +23,8 @@ function generateFakeHistory(){
         storeNote(minuteOld, getRandomInt(0, 100));
     }
 }
+
+function thereIsNewCode(){
+  var donothing = 0;
+  donothing++;
+}

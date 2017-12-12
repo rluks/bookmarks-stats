@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "outDir": "./built",
+        "allowJs": true,
+        "target": "es6",
+        "typeRoots": ["node_modules/@types", "node_modules/web-ext-types"]
+    },
+    "compileOnSave": true,
+    "include": [
+        "./src/**/*"
+    ]
+}
