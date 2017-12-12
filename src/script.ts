@@ -98,14 +98,9 @@ browser.runtime.onMessage.addListener((message) => {
 
 /* -------------------------------------------------------- */
 
-/* find minimum in array */
-Array.min = function( array ){
-    return Math.min.apply( Math, array );
-};
-
-Array.max = function( array ){
-    return Math.max.apply( Math, array );
-};
+/* find minimum and maximum in array */
+function arrMin( array ){return Math.min.apply( Math, array );}
+function arrMax( array ){return Math.max.apply( Math, array );}
 
 /* rounding */
 function toInt(n){ return Math.round(Number(n)); };
@@ -152,12 +147,12 @@ function createChart () {
   var ctx = sketchCanvas.getContext('2d');
 
   let minimumDatetime = bookmarksCountData[Object.keys(bookmarksCountData)[0]];//first record
-  let minimumCount = Array.min(Object.values(bookmarksCountData));
+  let minimumCount = arrMin(Object.values(bookmarksCountData));
   let chartMin = minimumCount - (10*minimumCount/100);//10%
   chartMin = (chartMin < 0) ? 0 : chartMin;
   chartMin = toInt(chartMin);
 
-  let maximumCount = Array.max(Object.values(bookmarksCountData));
+  let maximumCount = arrMax(Object.values(bookmarksCountData));
   let chartMax = maximumCount + (10*maximumCount/100);//10%
   chartMax = toInt(chartMax);
 
