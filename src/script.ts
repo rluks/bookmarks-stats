@@ -55,15 +55,16 @@ function getCurrentCount () {
 }
 
 function refreshData () {
+  browser.runtime.sendMessage({type: 'download_history'});
   getCurrentCount();
   clearHistoryTableHTML();
-  //initializeStorage();
 }
 
 function downloadHistory(){
-  browser.runtime.sendMessage({type: 'download_history'});
+      testDownload(bookmarksCountData);
 }
 
+var bookmarksCountData;
 
 function updateCurrent (bookmarksCount) {
   document.querySelector('#counter').textContent = bookmarksCount;
@@ -78,7 +79,7 @@ browser.runtime.onMessage.addListener((message) => {
     updateCurrent(message.bookmarksCount);
   }
   else if (message.type === 'history_data') {
-    testDownload(message.historyData);
+    bookmarksCountData = message.historyData;
   }
 });
 
