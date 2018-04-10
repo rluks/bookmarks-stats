@@ -149,7 +149,7 @@ function createChart () {
 
   var options = {
     title: {
-      display: true,
+      display: false,
       text: 'Number of bookmarks'
     },
     scales: {
@@ -193,7 +193,9 @@ function createChart () {
         label: 'Count',
         lineTension: 0.05,
         borderColor: '#3e95cd',
-        fill: false
+        fill: false,
+        radius: 1,
+        hitRadius: 3
       }
       ]
     },
