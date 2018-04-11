@@ -104,7 +104,7 @@ function toInt(n){ return Math.round(Number(n)); };
 
 refreshData();
 
-var intervalSeconds = 10;
+var intervalSeconds = 30;//TODO get rid of pooling
 setInterval(refreshData, intervalSeconds * 1000);
 setTimeout(createChart, intervalSeconds * 100);
 
