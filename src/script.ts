@@ -40,11 +40,6 @@ function requestClearingHistoryStorage () {
   browser.runtime.sendMessage({type: 'clear_history'});
 }
 
-function clearHistoryTableHTML () {
-  var div = document.getElementById('history-div')
-  div.innerHTML = "";
-}
-
 function getCurrentCount () {
   browser.runtime.sendMessage({type: 'get_current_count'});
 }
@@ -52,7 +47,6 @@ function getCurrentCount () {
 function refreshData () {
   browser.runtime.sendMessage({type: 'download_history'});
   getCurrentCount();
-  clearHistoryTableHTML();
 }
 
 function downloadHistory(){
@@ -66,8 +60,7 @@ function updateCurrent (bookmarksCount) {
 }
 
 function printDatapointsCount(count){
-  document.getElementById('datapointscount').innerHTML = "count";
-  console.log(count);
+  document.querySelector('#datapointscount').textContent = count;
 }
 
 /* -------------------------------------------------------- */
@@ -83,13 +76,12 @@ function setListeners(){
   
   document.getElementById('clear-history-btn').addEventListener('click', function () {
     requestClearingHistoryStorage();
-    clearHistoryTableHTML();
   });
   
   var textLink = document.getElementById('clear-history-a');
   textLink.setAttribute("href", "javascript:;");
   textLink.addEventListener('click', showClearStatsBtn);
-  
+
   document.getElementById('dont-clear-history-btn').addEventListener('click', hideClearStatsBtn);
   
 }
@@ -102,12 +94,11 @@ function setListeners(){
 browser.runtime.onMessage.addListener((message) => {
   if (message.type === 'current_count') {
     updateCurrent(message.bookmarksCount);
-    console.log("msg-count");
   }
   else if (message.type === 'history_data') {
     bookmarksCountData = message.historyData;
-    console.log("msg-history");
-    printDatapointsCount("bookmarksCountData");
+    console.log(bookmarksCountData);
+    printDatapointsCount(Object.keys(bookmarksCountData).length);
   }
 });
 
