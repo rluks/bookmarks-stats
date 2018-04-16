@@ -56,7 +56,7 @@ function refreshData () {
 }
 
 function downloadHistory(){
-      testDownload(bookmarksCountData);
+  testDownload(bookmarksCountData);
 }
 
 var bookmarksCountData;
@@ -65,23 +65,34 @@ function updateCurrent (bookmarksCount) {
   document.querySelector('#counter').textContent = bookmarksCount;
 }
 
+function printDatapointsCount(count){
+  document.getElementById('datapointscount').innerHTML = "count";
+  console.log(count);
+}
+
 /* -------------------------------------------------------- */
 
 /*                         ONCLICK                          */
 
 /* -------------------------------------------------------- */
 
-document.getElementById('download-history-btn').addEventListener('click', function () {
-  downloadHistory();
-});
-
-document.getElementById('clear-history-btn').addEventListener('click', function () {
-  requestClearingHistoryStorage();
-  clearHistoryTableHTML();
-});
-
-document.getElementById('clear-history-a').addEventListener('click', showClearStatsBtn);
-document.getElementById('dont-clear-history-btn').addEventListener('click', hideClearStatsBtn);
+function setListeners(){
+  document.getElementById('download-history-btn').addEventListener('click', function () {
+    downloadHistory();
+  });
+  
+  document.getElementById('clear-history-btn').addEventListener('click', function () {
+    requestClearingHistoryStorage();
+    clearHistoryTableHTML();
+  });
+  
+  var textLink = document.getElementById('clear-history-a');
+  textLink.setAttribute("href", "javascript:;");
+  textLink.addEventListener('click', showClearStatsBtn);
+  
+  document.getElementById('dont-clear-history-btn').addEventListener('click', hideClearStatsBtn);
+  
+}
 
 /* -------------------------------------------------------- */
 
@@ -91,9 +102,12 @@ document.getElementById('dont-clear-history-btn').addEventListener('click', hide
 browser.runtime.onMessage.addListener((message) => {
   if (message.type === 'current_count') {
     updateCurrent(message.bookmarksCount);
+    console.log("msg-count");
   }
   else if (message.type === 'history_data') {
     bookmarksCountData = message.historyData;
+    console.log("msg-history");
+    printDatapointsCount("bookmarksCountData");
   }
 });
 
@@ -115,7 +129,7 @@ function toInt(n){ return Math.round(Number(n)); };
 /*                        MAIN                              */
 
 /* -------------------------------------------------------- */
-
+setListeners();
 refreshData();
 
 var intervalSeconds = 30;//TODO get rid of pooling
