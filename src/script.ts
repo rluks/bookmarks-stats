@@ -1,5 +1,19 @@
 "use strict";
 
+function showClearStatsBtn(){
+  var btn = document.getElementById("clear-history-btn");
+  btn.className = "showme";
+  var noBtn = document.getElementById("dont-clear-history-btn");
+  noBtn.className = "showme";
+}
+
+function hideClearStatsBtn(){
+  var btn = document.getElementById("clear-history-btn");
+  btn.className = "hideme";
+  var noBtn = document.getElementById("dont-clear-history-btn");
+  noBtn.className = "hideme";
+}
+
 //  stupid js
 function addZero (i) {
   if (i < 10) {
