@@ -36,33 +36,14 @@ function formatTimestamp (timestamp) {
   return tmpStr;
 }
 
-function displayNote (timestamp, body) {
-  var tableRef = document.getElementById('history-table').getElementsByTagName('tbody')[0];
-  var newRow = tableRef.insertRow(tableRef.rows.length);
-
-  var newCell = newRow.insertCell(0);
-  var newText = document.createTextNode(formatTimestamp(timestamp));
-  newCell.appendChild(newText);
-
-  var newCell2 = newRow.insertCell(1);
-  var newText2 = document.createTextNode(body);
-  newCell2.appendChild(newText2);
-}
-
 function requestClearingHistoryStorage () {
   browser.runtime.sendMessage({type: 'clear_history'});
 }
 
 function clearHistoryTableHTML () {
-  var oldTbody = document.getElementById('history-table').getElementsByTagName('tbody')[0];
-  var newTbody = document.createElement('tbody');
-  oldTbody.parentNode.replaceChild(newTbody, oldTbody);
+  var div = document.getElementById('history-div')
+  div.innerHTML = "";
 }
-
-document.getElementById('clear-history-btn').addEventListener('click', function () {
-  requestClearingHistoryStorage();
-  clearHistoryTableHTML();
-});
 
 function getCurrentCount () {
   browser.runtime.sendMessage({type: 'get_current_count'});
@@ -83,6 +64,25 @@ var bookmarksCountData;
 function updateCurrent (bookmarksCount) {
   document.querySelector('#counter').textContent = bookmarksCount;
 }
+
+/* -------------------------------------------------------- */
+
+/*                         ONCLICK                          */
+
+/* -------------------------------------------------------- */
+
+document.getElementById('download-history-btn').addEventListener('click', function () {
+  downloadHistory();
+});
+
+document.getElementById('clear-history-btn').addEventListener('click', function () {
+  requestClearingHistoryStorage();
+  clearHistoryTableHTML();
+});
+
+document.getElementById('clear-history-a').addEventListener('click', showClearStatsBtn);
+document.getElementById('dont-clear-history-btn').addEventListener('click', hideClearStatsBtn);
+
 /* -------------------------------------------------------- */
 
 /*          COMMUNCIATION with BACKGROUND SCRIPT            */
@@ -121,12 +121,6 @@ refreshData();
 var intervalSeconds = 30;//TODO get rid of pooling
 setInterval(refreshData, intervalSeconds * 1000);
 setTimeout(createChart, intervalSeconds * 100);
-
-
-document.getElementById('download-history-btn').addEventListener('click', function () {
-  downloadHistory();
-});
-
 /* -------------------------------------------------------- */
 
 /*                        Chart                              */
