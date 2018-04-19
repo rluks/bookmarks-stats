@@ -6,4 +6,5 @@
 .idea/watcherTasks.xml
 .idea/
 node_modules/web-ext-types/
-built/
+built/*.js
+built/lib/*.js
