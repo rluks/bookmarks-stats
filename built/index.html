@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Count bookmarks</title>
+  <meta charset="utf-8">
+  <style>
+  * {
+    font-family: sans-serif;
+  }
+  #history-table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 7px;
+    margin: 0 auto;
+  }
+  .center {
+    margin: auto;
+    width: 90%;
+    padding: 10px;
+    text-align: center;
+  }
+  .hideme {
+    display: none;
+  }
+  .showme {
+    display: inline;
+  }
+  #clear-history-btn{
+    color: red;
+  }
+  </style>
+</head>
+<body>
+<div id="content" class="center">
+<div id="bookmarks-count" class="center">Bookmarks count: <span id="counter">(loading...)</span></div>
+
+<hr>
+
+<div id="chart" class="center" style="width:600px; height:500px;">
+</div>
+
+<hr>
+
+<div class="center">
+  <button id=download-history-btn>Download stats history</button>
+  <br>
+  <div id="datapoints-count-div" class="center">
+      There are <span id="datapointscount">X</span> data points.
+  </div>
+  <div id="clear-history-div">
+    <p id="clear-history-p"><a id="clear-history-a">Clear</a> stats history.</p>
+    <button id="dont-clear-history-btn" class="hideme">Do not clear.</button>
+    <button id="clear-history-btn" class="hideme">Really clear stats history!</button>
+  </div>
+</div>
+
+</div>
+<script src="/lib/moment-with-locales.js"></script>
+<script src="/lib/Chart.js"></script>
+<script src="download.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
