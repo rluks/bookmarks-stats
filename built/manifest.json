@@ -4,6 +4,12 @@
   "manifest_version": 2,
   "name": "Bookmark stats",
   "version": "1.5.8",
+  
+  "applications": {
+	  "gecko": {
+		"id": "{4d5f3c0b-d0c5-4082-9c48-22dd1981cd14}" 
+	  }
+  },
 
   "permissions": [
     "bookmarks", "<all_urls>", "storage"
