@@ -3,7 +3,7 @@
   "description": "Bookmark statistics",
   "manifest_version": 2,
   "name": "Bookmark stats",
-  "version": "1.5.8",
+  "version": "1.5.8.1",
   
   "applications": {
 	  "gecko": {
