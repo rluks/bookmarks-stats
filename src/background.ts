@@ -29,6 +29,7 @@ browser.browserAction.onClicked.addListener(() => {
 function onMessage(message, sender, sendResponse) {
     if (message.type == "clear_history") {
       clearStorage();
+      loadHistory ();
     }else if (message.type == "get_current_count") {
         browser.tabs.sendMessage(sender.tab.id, {type: "current_count", bookmarksCount});
     }
@@ -43,10 +44,12 @@ function displayCountBadge(){
 
 function onBookmarkCreated(id, bookmarkInfo) {
     countBookmarks();
+    loadHistory ();
 }
 
 function onBookmarkRemoved(id, removeInfo) {
     countBookmarks();
+    loadHistory ();
 }
 
 function generateInitialZeroCount(){

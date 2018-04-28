@@ -29,7 +29,7 @@ function onStorageItems (results) {
       historyDataTmp[noteKey] = results[noteKey];
     }
 
-    historyData= historyDataTmp;
+    historyData = historyDataTmp;
 }
 
 function loadHistory () {
