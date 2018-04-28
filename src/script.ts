@@ -14,28 +14,6 @@ function hideClearStatsBtn(){
   noBtn.className = "hideme";
 }
 
-//  stupid js
-function addZero (i) {
-  if (i < 10) {
-    i = '0' + i;
-  }
-  return i;
-}
-
-function formatTimestamp (timestamp) {
-  var dateObj = new Date(timestamp);
-  var isoDate = dateObj.toISOString();
-
-  var datepart = isoDate.split('T')[0];
-  var hours = addZero(dateObj.getHours());
-  var minutes = addZero(dateObj.getMinutes());
-  var seconds = addZero(dateObj.getSeconds());
-  var timePart = hours + ':' + minutes + ':' + seconds;
-
-  var tmpStr = datepart + ' ' + timePart;
-  return tmpStr;
-}
-
 function requestClearingHistoryStorage () {
   browser.runtime.sendMessage({type: 'clear_history'});
 }
