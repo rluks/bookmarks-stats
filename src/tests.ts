@@ -1,4 +1,5 @@
 
+/* generate a single bookmark with a number in title */
 function generateTestingBookmark(number) {
     var createBookmark = browser.bookmarks.create({
         title: "bookmark" + number,
@@ -6,6 +7,7 @@ function generateTestingBookmark(number) {
     });
 }
 
+/* generate 3 bookmarks */
 function generateTestingBookmarks() {
     if(!DEBUG)
         return;
