@@ -7,6 +7,7 @@ function download(filename, data) {
     element.click();
     document.body.removeChild(element);
 }
+
 function testDownload(data) {
     var filename = "myjson.json";
     /*var data = {"widget": {

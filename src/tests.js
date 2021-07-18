@@ -7,6 +7,7 @@ function generateTestingBookmark(number) {
         url: "https://www.example.org"
     });
 }
+
 /* generate 3 bookmarks */
 function generateTestingBookmarks() {
     if (!DEBUG)
@@ -15,6 +16,7 @@ function generateTestingBookmarks() {
         generateTestingBookmark(i);
     }
 }
+
 /* create bookmark counts history (eg for the chart to have some data to show) */
 function generateFakeHistory() {
     if (!DEBUG)

@@ -5,35 +5,45 @@ function showClearStatsBtn() {
     var noBtn = document.getElementById("dont-clear-history-btn");
     noBtn.className = "showme";
 }
+
 function hideClearStatsBtn() {
     var btn = document.getElementById("clear-history-btn");
     btn.className = "hideme";
     var noBtn = document.getElementById("dont-clear-history-btn");
     noBtn.className = "hideme";
 }
+
 function requestClearingHistoryStorage() {
     browser.runtime.sendMessage({ type: 'clear_history' });
 }
+
 function getCurrentCount() {
     browser.runtime.sendMessage({ type: 'get_current_count' });
 }
+
 function refreshData() {
     browser.runtime.sendMessage({ type: 'download_history' });
     getCurrentCount();
 }
+
 function downloadHistory() {
     testDownload(bookmarksCountData);
 }
+
 var bookmarksCountData;
+
 function updateCurrent(bookmarksCount) {
     document.querySelector('#counter').textContent = bookmarksCount;
 }
+
 function printDatapointsCount(count) {
     document.querySelector('#datapointscount').textContent = count;
 }
+
 /* -------------------------------------------------------- */
 /*                         ONCLICK                          */
 /* -------------------------------------------------------- */
+
 function setListeners() {
     document.getElementById('download-history-btn').addEventListener('click', function () {
         downloadHistory();
@@ -46,9 +56,11 @@ function setListeners() {
     textLink.addEventListener('click', showClearStatsBtn);
     document.getElementById('dont-clear-history-btn').addEventListener('click', hideClearStatsBtn);
 }
+
 /* -------------------------------------------------------- */
 /*          COMMUNCIATION with BACKGROUND SCRIPT            */
 /* -------------------------------------------------------- */
+
 browser.runtime.onMessage.addListener((message) => {
     if (message.type === 'current_count') {
         updateCurrent(message.bookmarksCount);
@@ -59,26 +71,34 @@ browser.runtime.onMessage.addListener((message) => {
         printDatapointsCount(Object.keys(bookmarksCountData).length);
     }
 });
+
 /* -------------------------------------------------------- */
 /*                        Math                              */
 /* -------------------------------------------------------- */
+
 /* find minimum and maximum in array */
 function arrMin(array) { return Math.min.apply(Math, array); }
 function arrMax(array) { return Math.max.apply(Math, array); }
+
 /* rounding */
 function toInt(n) { return Math.round(Number(n)); }
 ;
+
 /* -------------------------------------------------------- */
 /*                        MAIN                              */
 /* -------------------------------------------------------- */
+
 setListeners();
 refreshData();
+
 var intervalSeconds = 30; //TODO get rid of pooling
 setInterval(refreshData, intervalSeconds * 1000);
 setTimeout(createChart, intervalSeconds * 100);
+
 /* -------------------------------------------------------- */
 /*                        Chart                              */
 /* -------------------------------------------------------- */
+
 function createCanvas() {
     var canvasDiv = document.getElementById('chart');
     var width = canvasDiv.offsetWidth;
@@ -89,6 +109,7 @@ function createCanvas() {
     canvasDiv.appendChild(canvas);
     return canvas;
 }
+
 function createChart() {
     var sketchCanvas = createCanvas();
     var ctx = sketchCanvas.getContext('2d');

@@ -9,7 +9,9 @@ function countBookmarks() {
             }
             queue.push([url, bookmark]);
         }
+        
         bookmarksCount = queue.length;
+        
         displayCountBadge();
         storeCount();
     });
