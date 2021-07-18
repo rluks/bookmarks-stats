@@ -1,6 +1,6 @@
 "use strict";
 
-const DEBUG = false;
+const DEBUG = true;
 
 const bounceDelay = 250; //ms
 
