@@ -1,3 +1,9 @@
+I'm abandoning TypeScript, most WebExtensions tutorials are in pure js and that's confusing.
+
+
+
+
+
 Setting up Firefox extension development in Typescript on Windows
 
 Install NodeJS LTS
