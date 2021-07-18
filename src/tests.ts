@@ -1,6 +1,8 @@
 
 /* generate a single bookmark with a number in title */
 function generateTestingBookmark(number) {
+    if(!DEBUG)
+        return;
     var createBookmark = browser.bookmarks.create({
         title: "bookmark" + number,
         url: "https://www.example.org"
@@ -16,6 +18,7 @@ function generateTestingBookmarks() {
     }
 }
 
+/* create bookmark counts history (eg for the chart to have some data to show) */
 function generateFakeHistory(){
     if(!DEBUG)
         return;
