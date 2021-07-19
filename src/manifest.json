@@ -16,14 +16,7 @@
   ],
 
   "background": {
-    "scripts": [
-      "lib/Debounce.js",
-      "tests.js",
-      "bookmarks.js",
-      "math.js",
-      "storage.js",
-      "background.js"
-    ]
+    "page": "background-page.html"
   },
 
   "browser_action": {
