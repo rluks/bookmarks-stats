@@ -21,6 +21,8 @@ function generateTestingBookmarks() {
 function generateFakeHistory() {
     if (!DEBUG)
         return;
+
+    console.log("DEBUG: generating fake history");
     for (let i = 600; i > 0; i -= 30) {
         let minuteOld = new Date();
         minuteOld.setSeconds(minuteOld.getSeconds() - i);
