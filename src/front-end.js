@@ -37,8 +37,7 @@ function setListeners() {
         window.location.reload();
     });
     
-    var textLink = document.getElementById('clear-history-a');
-    textLink.setAttribute("href", "javascript:;");
-    textLink.addEventListener('click', showClearStatsBtn);
+    document.getElementById('clear-history-p').addEventListener('click', showClearStatsBtn);
+
     document.getElementById('dont-clear-history-btn').addEventListener('click', hideClearStatsBtn);
 }
