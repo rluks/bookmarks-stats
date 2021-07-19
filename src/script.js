@@ -37,7 +37,11 @@ function updateCurrent(bookmarksCount) {
 }
 
 function printDatapointsCount(count) {
-    document.querySelector('#datapointscount').textContent = count;
+    if(count === 0){
+        document.querySelector('#datapointscount').textContent = "No data points of bookmarks count history. Continue using your bookmarks as usuall and check back later.";
+    }else{
+        document.querySelector('#datapointscount').textContent = "Data points of bookmarks count history: " + count;
+    }
 }
 
 /* -------------------------------------------------------- */
