@@ -29,7 +29,7 @@ function onMessage(message, sender, sendResponse) {
     else if (message.type == "get_current_count") {
         browser.tabs.sendMessage(sender.tab.id, { type: "current_count", bookmarksCount });
     }
-    else if (message.type == "download_history") {
+    else if (message.type == "get_stats_history") {
         browser.tabs.sendMessage(sender.tab.id, { type: "history_data", historyData });
     }
 }
