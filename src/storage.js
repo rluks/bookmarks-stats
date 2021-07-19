@@ -7,6 +7,7 @@ function onCleared() {
 }
 
 function storeNote(timestamp, body) {
+    timestamp = timestamp.toISOString();
     var storingNote = browser.storage.local.set({ [timestamp]: body });
     storingNote.then(() => {
     }, onStorageError);
