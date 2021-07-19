@@ -14,10 +14,10 @@ function refreshData() {
 }
 
 function downloadHistory() {
-    DownloadStatsHistory(bookmarksCountData);
+    DownloadStatsHistory(statsHistory);
 }
 
-var bookmarksCountData;
+var statsHistory;
 
 /* -------------------------------------------------------- */
 /*          COMMUNCIATION with BACKGROUND SCRIPT            */
@@ -27,10 +27,10 @@ browser.runtime.onMessage.addListener((message) => {
     if (message.type === 'current_count') {
         updateCurrent(message.bookmarksCount);
     }
-    else if (message.type === 'history_data') {
-        bookmarksCountData = message.historyData;
-        console.log(bookmarksCountData);
-        printDatapointsCount(Object.keys(bookmarksCountData).length);
+    else if (message.type === 'stats_history') {
+        statsHistory = message.historyData;
+        console.log(statsHistory);
+        printDatapointsCount(Object.keys(statsHistory).length);
     }
 });
 

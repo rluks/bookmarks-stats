@@ -14,12 +14,12 @@ function createCanvas() {
 function createChart() {
     var sketchCanvas = createCanvas();
     var ctx = sketchCanvas.getContext('2d');
-    let minimumDatetime = bookmarksCountData[Object.keys(bookmarksCountData)[0]]; //first record
-    let minimumCount = arrMin(Object.values(bookmarksCountData));
+    let minimumDatetime = statsHistory[Object.keys(statsHistory)[0]]; //first record
+    let minimumCount = arrMin(Object.values(statsHistory));
     let chartMin = minimumCount - (10 * minimumCount / 100); //10%
     chartMin = (chartMin < 0) ? 0 : chartMin;
     chartMin = toInt(chartMin);
-    let maximumCount = arrMax(Object.values(bookmarksCountData));
+    let maximumCount = arrMax(Object.values(statsHistory));
     let chartMax = maximumCount + (10 * maximumCount / 100); //10%
     chartMax = toInt(chartMax);
     var options = {
@@ -60,9 +60,9 @@ function createChart() {
     var myLineChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: Object.keys(bookmarksCountData),
+            labels: Object.keys(statsHistory),
             datasets: [{
-                    data: Object.values(bookmarksCountData),
+                    data: Object.values(statsHistory),
                     label: 'Count',
                     lineTension: 0.05,
                     borderColor: '#3e95cd',
