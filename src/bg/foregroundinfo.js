@@ -1,4 +1,4 @@
-var foregroundID;
+let foregroundID;
 
 function registerForegroundID(id){
     foregroundID = id;

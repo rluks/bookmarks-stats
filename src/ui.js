@@ -1,16 +1,16 @@
 "use strict";
 
 function showClearStatsBtn() {
-    var btn = document.getElementById("clear-history-btn");
+    let btn = document.getElementById("clear-history-btn");
     btn.className = "showme";
-    var noBtn = document.getElementById("dont-clear-history-btn");
+    let noBtn = document.getElementById("dont-clear-history-btn");
     noBtn.className = "showme";
 }
 
 function hideClearStatsBtn() {
-    var btn = document.getElementById("clear-history-btn");
+    let btn = document.getElementById("clear-history-btn");
     btn.className = "hideme";
-    var noBtn = document.getElementById("dont-clear-history-btn");
+    let noBtn = document.getElementById("dont-clear-history-btn");
     noBtn.className = "hideme";
 }
 
