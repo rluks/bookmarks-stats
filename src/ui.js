@@ -14,11 +14,11 @@ function hideClearStatsBtn() {
     noBtn.className = "hideme";
 }
 
-function updateCurrent(bookmarksCount) {
+function updateBookmarkCount(bookmarksCount) {
     document.querySelector('#counter').textContent = bookmarksCount;
 }
 
-function printDatapointsCount(count) {
+function updateDatapointsCount(count) {
     if(count === 0){
         document.querySelector('#datapointscount').textContent = "No data points of bookmarks stats history. Continue using your bookmarks as usual and check back later.";
     }else{
@@ -26,7 +26,7 @@ function printDatapointsCount(count) {
     }
 }
 
-function setListeners() {
+function setButtonsListeners() {
     
     document.getElementById('download-history-btn').addEventListener('click', function () {
         downloadHistory();
@@ -41,3 +41,5 @@ function setListeners() {
 
     document.getElementById('dont-clear-history-btn').addEventListener('click', hideClearStatsBtn);
 }
+
+setButtonsListeners();
