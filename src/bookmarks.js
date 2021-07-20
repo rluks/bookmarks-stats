@@ -1,4 +1,7 @@
+"use strict";
+
 function countBookmarks() {
+    console.log("Counting bookmarks...");
     const ignoredScheme = /^(place|about|javascript|data)\:/i;
     browser.bookmarks.search({}).then(bookmarks => {
         let queue = [];
@@ -11,7 +14,7 @@ function countBookmarks() {
         }
         
         bookmarksCount = queue.length;
-        
+        console.log(bookmarksCount);
         displayCountBadge();
         storeCount();
     });

@@ -1,3 +1,5 @@
+"use strict";
+
 /* generate a single bookmark with a number in title */
 function generateTestingBookmark(number) {
     if (!DEBUG)

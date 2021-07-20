@@ -1,3 +1,5 @@
+"use strict";
+
 function onStorageError(error) {
     console.log(error);
 }
@@ -8,6 +10,8 @@ function onCleared() {
 
 function storeNote(timestamp, body) {
     timestamp = timestamp.toISOString();
+    console.log("Storing note...");
+    console.log(timestamp + " : " + body);
     var storingNote = browser.storage.local.set({ [timestamp]: body });
     storingNote.then(() => {
     }, onStorageError);
@@ -23,11 +27,14 @@ function clearStorage() {
 }
 
 function onStorageItems(results) {
+    console.log("Loading history from storage...")
     var historyDataTmp = {};
     var noteKeys = Object.keys(results);
     for (let noteKey of noteKeys) {
         historyDataTmp[noteKey] = results[noteKey];
     }
+    console.log("tmp history");
+    console.log(historyDataTmp);
     historyData = historyDataTmp;
 }
 
