@@ -1,7 +1,6 @@
 "use strict";
 
 function updateUI(data){
-    console.log("The new data:");
     console.log(data);
 }
 

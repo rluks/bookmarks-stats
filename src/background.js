@@ -4,14 +4,11 @@ import { refreshBookmarkStats } from '/bg/bookmarkdata.js';
 
 function onMessage(message, sender, sendResponse) {
     if (message.type == "hello") {
-        console.log("registering")
         registerForegroundID(sender.tab.id);
 
-        console.log("sending what I got right away");
         //send what stats are available right away
         sendBookmarkStats();
 
-        console.log("refreshing and then sending fresh");
         //but update the stats and then once ready send the new stats
         refreshBookmarkStats().then(sendBookmarkStats);
     }
