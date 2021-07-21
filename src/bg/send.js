@@ -1,8 +1,8 @@
 import { foregroundID } from '/bg/foregroundinfo.js';
-import {bookmarkData as data} from '/bg/bookmarkdata.js';
+import {bookmarkStatsData as data} from '/bg/bookmarkdata.js';
 
-function sendBookmarkData(){
+function sendBookmarkStats(){
     browser.tabs.sendMessage(foregroundID, { type: "data", data });
 }
 
-export { sendBookmarkData };
+export { sendBookmarkStats };
