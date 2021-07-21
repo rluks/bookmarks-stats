@@ -1,10 +1,10 @@
-import { registerForegroundID } from '/bg/foregroundinfo.js';
 import { sendBookmarkStats } from '/bg/send.js';
 import { refreshBookmarkStats } from '/bg/bookmarkdata.js';
+import { onBrowserAction } from '/bg/browseraction.js';
+import { handleRemoved } from '/bg/foregroundinfo.js';
 
 function onMessage(message, sender, sendResponse) {
     if (message.type == "hello") {
-        registerForegroundID(sender.tab.id);
 
         //send what stats are available right away
         sendBookmarkStats();
@@ -15,7 +15,5 @@ function onMessage(message, sender, sendResponse) {
 }
 
 browser.runtime.onMessage.addListener(onMessage);
-
-browser.browserAction.onClicked.addListener(() => {
-    browser.tabs.create({ url: "/index.html" });
-});
+browser.browserAction.onClicked.addListener(onBrowserAction);
+browser.tabs.onRemoved.addListener(handleRemoved);
