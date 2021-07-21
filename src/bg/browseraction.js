@@ -13,4 +13,8 @@ function onBrowserAction(){
     }
 }
 
-export {onBrowserAction};
+function updateBadge(count) {
+    browser.browserAction.setBadgeText({ text: count.toString() });
+}
+
+export {onBrowserAction, updateBadge};
