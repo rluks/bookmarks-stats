@@ -4,7 +4,7 @@ import { updateBadge } from '/bg/browseraction.js';
 let bookmarkStatsData = {};
 
 function onBookmarksSearchFulfilled(bookmarks){;
-    const ignoredScheme = /^(place|about|javascript|data)\:/i;
+    const ignoredScheme = /^(place|about|javascript|data)\:/i;//TODO do I want to ignore these?
     let queue = [];
     for (const bookmark of bookmarks) {
         const url = bookmark.url;
