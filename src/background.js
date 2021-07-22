@@ -14,7 +14,7 @@ const defaultInterval = 400;
 let interval = defaultInterval;//milliseconds
 
 
-function handleThrottleTimeout(){
+/*function handleThrottleTimeout(){
   enableCall = true;
 
   if(interval > defaultInterval){
@@ -30,22 +30,36 @@ function handleThrottleTimeout(){
       setTimeout(handleThrottleTimeout, interval);//TODO remove calling itself
     }
   }
+}*/
+
+function handleThrottleTimeout(){
+  enableCall = true;
+
+  if(interval > defaultInterval){
+    queueDepth = 0;
+    interval = interval/2;
+    if(interval < defaultInterval){
+      interval = defaultInterval;
+    }
+
+    refreshBookmarkStats().then(interval = defaultInterval);
+  }
 }
 
 function throttle() {
 
     if (!enableCall) {
+      //console.log(new Date() + " throttle()");
       queueDepth++;
       interval = 2*interval;
       if(interval > maxInterval){
         interval = maxInterval;
       }
       return;
-    };
+    }
 
     enableCall = false;
-    refreshBookmarkStats();//TODO no chaining, thus if there are already async operations running it will add more competing instead of waiting before next one finishes
-    setTimeout(handleThrottleTimeout, interval);
+    refreshBookmarkStats().then(setTimeout(handleThrottleTimeout, interval));
 }
 
 function addBookmarkListeners() {

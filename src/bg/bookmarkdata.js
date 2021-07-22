@@ -23,7 +23,7 @@ function onBookmarksSearchFulfilled(bookmarks){;
 }
 
 function refreshBookmarkStats(){
-    //console.log(new Date() + " refreshBookmarkStats()");
+    console.log(new Date() + " refreshBookmarkStats()");
     return browser.bookmarks.search({}).then(onBookmarksSearchFulfilled);
 }
 
