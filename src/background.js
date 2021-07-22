@@ -11,7 +11,8 @@ let enableCall = true;
 let queueDepth = 0;
 const maxInterval = 5000;
 const defaultInterval = 400;
-let interval = defaultInterval;
+let interval = defaultInterval;//milliseconds
+
 
 function handleThrottleTimeout(){
   enableCall = true;
@@ -25,9 +26,7 @@ function handleThrottleTimeout(){
       interval = defaultInterval;
     }
 
-    console.log("handleThrottleTimeout() q " + new Date().toISOString() + " " + interval + " queuedepth: " + queueDepth);
-
-    onBookmarkChange();
+    refreshBookmarkStats();
 
     if(interval > defaultInterval){
       setTimeout(handleThrottleTimeout, interval);
@@ -35,36 +34,25 @@ function handleThrottleTimeout(){
   }
 }
 
-function throttle(callback) {//milliseconds
+function throttle() {
 
-  return function(...args) {
     if (!enableCall) {
       queueDepth++;
       interval = 2*interval;
       if(interval > maxInterval){
         interval = maxInterval;
       }
-
-      console.log("throttle() return " + new Date().toISOString() + " " + interval + " queuedepth: " + queueDepth);
-
       return;
     };
 
     enableCall = false;
-    console.log("throttle() go " + new Date().toISOString() + " " + interval + " queuedepth: " + queueDepth);
-
-    callback.apply(this, args);
-    setTimeout(handleThrottleTimeout, interval);
-  }
-}
-
-function onBookmarkChange() {
     refreshBookmarkStats();
+    setTimeout(handleThrottleTimeout, interval);
 }
 
 function addBookmarkListeners() {
-    browser.bookmarks.onCreated.addListener(throttle(onBookmarkChange));
-    browser.bookmarks.onRemoved.addListener(throttle(onBookmarkChange));
+    browser.bookmarks.onCreated.addListener(throttle);
+    browser.bookmarks.onRemoved.addListener(throttle);
 }
 
 addBookmarkListeners()
