@@ -7,30 +7,40 @@ browser.runtime.onMessage.addListener(onMessage);
 browser.browserAction.onClicked.addListener(onBrowserAction);
 browser.tabs.onRemoved.addListener(handleRemoved);
 
+let enableCall = true;
+let queueDepth = 0;
 
+function handleThrottleTimeout(){
+  enableCall = true;
 
-function throttle(callback, interval) {//milliseconds
-  let enableCall = true;
-
-  return function(...args) {
-    if (!enableCall) return;
-
-    enableCall = false;
-    callback.apply(this, args);
-    setTimeout(() => enableCall = true, interval);
+  if(queueDepth > 0){
+    queueDepth = 0;
+    onBookmarkChange();
   }
 }
 
+function throttle(callback, interval) {//milliseconds
+
+  return function(...args) {
+    if (!enableCall) {
+      queueDepth++;
+      return;
+    };
+
+    enableCall = false;
+    callback.apply(this, args);
+    setTimeout(handleThrottleTimeout, interval);
+  }
+}
 
 function onBookmarkChange() {
     refreshBookmarkStats();
 }
 
 function addBookmarkListeners() {
-    browser.bookmarks.onCreated.addListener(throttle(onBookmarkChange,300));
-    browser.bookmarks.onRemoved.addListener(throttle(onBookmarkChange,300));
+    browser.bookmarks.onCreated.addListener(throttle(onBookmarkChange,400));
+    browser.bookmarks.onRemoved.addListener(throttle(onBookmarkChange,400));
 }
 
 addBookmarkListeners()
-
 refreshBookmarkStats();
