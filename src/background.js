@@ -11,7 +11,31 @@ function onBookmarkChange() {
     refreshBookmarkStats();
 }
 
-browser.bookmarks.onCreated.addListener(onBookmarkChange);
-browser.bookmarks.onRemoved.addListener(onBookmarkChange);
+function addBookmarkListeners() {
+    browser.bookmarks.onCreated.addListener(onBookmarkChange);
+    browser.bookmarks.onRemoved.addListener(onBookmarkChange);
+}
+
+/*
+
+/As of 2021 07 - not yet supported in FF, see https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/bookmarks/onImportBegan
+
+function onImportStart(){
+    browser.bookmarks.onCreated.removeListener(onBookmarkChange);
+    browser.bookmarks.onRemoved.removeListener(onBookmarkChange);
+}
+
+function onImportEnd(){
+    addBookmarkListeners();
+    refreshBookmarkStats();
+}
+
+/
+//browser.bookmarks.onImportBegan.addListener(onImportStart); 
+//browser.bookmarks.onImportEnded.addListener(onImportEnd);
+
+*/
+
+addBookmarkListeners()
 
 refreshBookmarkStats();
