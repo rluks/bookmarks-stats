@@ -17,8 +17,6 @@ let interval = defaultInterval;//milliseconds
 function handleThrottleTimeout(){
   enableCall = true;
 
-  console.log("handleThrottleTimeout() s " + new Date().toISOString() + " " + interval + " queuedepth: " + queueDepth);
-
   if(interval > defaultInterval){
     queueDepth = 0;
     interval = interval/2;
@@ -26,10 +24,10 @@ function handleThrottleTimeout(){
       interval = defaultInterval;
     }
 
-    refreshBookmarkStats();
+    refreshBookmarkStats();//TODO no chaining,  
 
     if(interval > defaultInterval){
-      setTimeout(handleThrottleTimeout, interval);
+      setTimeout(handleThrottleTimeout, interval);//TODO remove calling itself
     }
   }
 }
@@ -46,7 +44,7 @@ function throttle() {
     };
 
     enableCall = false;
-    refreshBookmarkStats();
+    refreshBookmarkStats();//TODO no chaining, thus if there are already async operations running it will add more competing instead of waiting before next one finishes
     setTimeout(handleThrottleTimeout, interval);
 }
 
