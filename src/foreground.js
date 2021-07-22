@@ -7,7 +7,6 @@ function getCurrentBookmarkCount(data){
 }
 
 function updateUI(data){
-    console.log(data);
     updateBookmarkCount(getCurrentBookmarkCount(data));
     updateDatapointsCount(Object.keys(data).length);
 }
