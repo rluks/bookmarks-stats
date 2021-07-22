@@ -9,7 +9,7 @@ browser.tabs.onRemoved.addListener(handleRemoved);
 
 let enableCall = true;
 let queueDepth = 0;
-const maxInterval = 50000;
+const maxInterval = 5000;
 const defaultInterval = 400;
 let interval = defaultInterval;
 
