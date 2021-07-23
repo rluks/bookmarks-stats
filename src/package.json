@@ -1,0 +1,19 @@
+{
+  "name": "bookmark-stats",
+  "version": "1.7.0",
+  "description": "Bookmark statistics",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "bitbucket.org/rluks/bookmarks-stats"
+  },
+  "keywords": [
+    "bookmarks",
+    "addon"
+  ],
+  "author": "Roman Luks",
+  "license": "ISC"
+}
