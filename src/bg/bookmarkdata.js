@@ -24,6 +24,7 @@ function onBookmarksSearchFulfilled(bookmarks){;
 
 function refreshBookmarkStats(){
     //console.log(new Date() + " refreshBookmarkStats()");
+    //TODO poslat zpravu frontendu ze refreshuje
     return browser.bookmarks.search({}).then(onBookmarksSearchFulfilled);
 }
 
