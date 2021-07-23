@@ -1,45 +1,32 @@
-"use strict";
+import {updateBookmarkCount, updateDatapointsCount} from '/ui-text.js';
+import {createChart, updateChart} from '/ui-chart.js';
+import {setButtonsListeners} from '/ui-buttons.js';
+import {getCurrentBookmarkCount} from '/ui-count.js';
 
-function showClearStatsBtn() {
-    let btn = document.getElementById("clear-history-btn");
-    btn.className = "showme";
-    let noBtn = document.getElementById("dont-clear-history-btn");
-    noBtn.className = "showme";
-}
+let data = {};
+let firstRun = true;
 
-function hideClearStatsBtn() {
-    let btn = document.getElementById("clear-history-btn");
-    btn.className = "hideme";
-    let noBtn = document.getElementById("dont-clear-history-btn");
-    noBtn.className = "hideme";
-}
+function updateUI(data){
+    console.log(data);
+    updateBookmarkCount(getCurrentBookmarkCount(data));
+    updateDatapointsCount(Object.keys(data).length);
 
-function updateBookmarkCount(bookmarksCount) {
-    document.querySelector('#counter').textContent = bookmarksCount;
-}
-
-function updateDatapointsCount(count) {
-    if(count === 0){
-        document.querySelector('#datapointscount').textContent = "No bookmark history. Continue using your bookmarks as usual and check back later.";
+    if(firstRun){
+        firstRun = false;
+        createChart(data);
     }else{
-        document.querySelector('#datapointscount').textContent = "Bookmarks history: " + count + " changes recorded.";
+        updateChart(data);
     }
+
 }
 
-function setButtonsListeners() {
-    
-    document.getElementById('download-history-btn').addEventListener('click', function () {
-        downloadHistory();
-    });
+browser.runtime.sendMessage({ type: "hello" });
 
-    document.getElementById('clear-history-btn').addEventListener('click', function () {
-        requestClearingHistoryStorage();
-        window.location.reload();
-    });
-    
-    document.getElementById('clear-history-p').addEventListener('click', showClearStatsBtn);
-
-    document.getElementById('dont-clear-history-btn').addEventListener('click', hideClearStatsBtn);
-}
+browser.runtime.onMessage.addListener((message) => {
+    if (message.type === 'data') {
+        data = message.data;
+        updateUI(data);
+    }
+});
 
 setButtonsListeners();
