@@ -20,6 +20,7 @@ function onBookmarksSearchFulfilled(bookmarks){;
     bookmarkStatsData[dateNow] = bookmarksCount;
     updateBadge(bookmarksCount);
     sendBookmarkStats();
+    //TODO incrementally add stats to storage
 }
 
 function refreshBookmarkStats(){

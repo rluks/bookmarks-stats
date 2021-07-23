@@ -55,5 +55,7 @@ function addBookmarkListeners() {
     browser.bookmarks.onRemoved.addListener(throttle);
 }
 
+//TODO load from storage
 addBookmarkListeners()
 refreshBookmarkStats();
+//TODO save to storage
