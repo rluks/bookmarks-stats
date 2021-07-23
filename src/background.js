@@ -16,4 +16,3 @@ function addBookmarkListeners() {
 //TODO load from storage
 addBookmarkListeners()
 refreshBookmarkStats();
-//TODO save to storage
