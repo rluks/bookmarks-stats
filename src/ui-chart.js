@@ -9,6 +9,10 @@ function toInt(n) { return Math.round(Number(n)); }
 
 function createCanvas() {
     var canvasDiv = document.getElementById('chart');
+    while(canvasDiv.firstChild){
+        canvasDiv.removeChild(canvasDiv.firstChild);
+    }
+
     var width = canvasDiv.offsetWidth;
     var canvas = document.createElement('canvas');
     canvas.id = "CursorLayer";
@@ -20,31 +24,7 @@ function createCanvas() {
 
 let myLineChart;
 
-function minimumCount(statsHistory){
-    return arrMin(Object.values(statsHistory));
-}
-
-function chartMin(statsHistory){
-    let chartMin = minimumCount(statsHistory) - (10 * minimumCount(statsHistory) / 100); //10%
-    chartMin = (chartMin < 0) ? 0 : chartMin;
-    chartMin = toInt(chartMin);
-    return chartMin;
-}
-
-function maximumCount(statsHistory){
-    return arrMax(Object.values(statsHistory));
-}
-
-function chartMax(statsHistory){
-    let chartMax = maximumCount(statsHistory) + (10 * maximumCount(statsHistory) / 100); //10%
-    chartMax = toInt(chartMax);
-    return chartMax;
-}
-
-
 function createChart(statsHistory) {
-    console.log("createChart");
-    console.log(statsHistory);
 
     var sketchCanvas = createCanvas();
     var ctx = sketchCanvas.getContext('2d');  
@@ -57,7 +37,6 @@ function createChart(statsHistory) {
             xAxes: [{
                     type: 'time',
                     time: {
-                        //unitStepSize: 0.5,
                         round: 'minutes',
                         tooltipFormat: 'YYYY-MM-DD HH:mm',
                         displayFormats: {
@@ -71,8 +50,6 @@ function createChart(statsHistory) {
                 }],
             yAxes: [{
                     ticks: {
-                        //suggestedMin: chartMin(statsHistory),
-                        //suggestedMax: chartMax(statsHistory),
                         userCallback: function (label, index, labels) {
                             // when the floored value is the same as the value we have a whole number
                             if (Math.floor(label) === label) {
@@ -103,22 +80,8 @@ function createChart(statsHistory) {
 }
 
 function updateChart(data){
-    console.log(new Date().toISOString() + " updateChart");
-    console.log(data);
-
-    myLineChart.data.labels.push(Object.keys(data));
-
-    myLineChart.data.datasets.forEach((dataset) => {
-        dataset.data.push(Object.values(data));
-    });
-
-    let newxAxes = myLineChart.options.scales.xAxes[0];
-    newxAxes.ticks.min = getMinDate(data);
-    newxAxes.ticks.max = getMaxDate(data);
-    console.log(newxAxes);
-    myLineChart.options.scales.xAxes[0] = newxAxes;
-
-    myLineChart.update();
+    myLineChart.destroy();
+    createChart(data);
 }
 
 export {createChart, updateChart}

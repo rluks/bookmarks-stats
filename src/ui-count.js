@@ -5,7 +5,6 @@ function getCurrentBookmarkCount(data){
 
 function getMinDate(data){
     let minKey = Object.keys(data).reduce((a, b) => a < b ? a : b);
-    console.log("minkey " + minKey);
     return minKey;
 }
 
