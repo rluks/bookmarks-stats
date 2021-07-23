@@ -10,6 +10,8 @@ function updateUI(data){
     console.log(data);
     updateBookmarkCount(getCurrentBookmarkCount(data));
     updateDatapointsCount(Object.keys(data).length);
+    //TODO refresh the chart
+    //TODO add the chart yo! xD
 }
 
 browser.runtime.sendMessage({ type: "hello" });
