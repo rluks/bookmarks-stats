@@ -8,7 +8,7 @@ browser.browserAction.onClicked.addListener(onBrowserAction);
 browser.tabs.onRemoved.addListener(handleRemoved);
 
 let enableCall = true;
-const defaultInterval = 1000;
+const defaultInterval = 400;
 let interval = defaultInterval;//milliseconds
 let queue = 0;
 let maxQueue = 0;
@@ -18,7 +18,7 @@ function handleThrottleTimeout(){
   if(queue > maxQueue){
     //console.log(new Date().toISOString() + " more requests came during timeout, waiting if there would be even more...");
     maxQueue = queue;
-    setTimeout(handleThrottleTimeout, interval);
+    setTimeout(handleThrottleTimeout, interval*0.66);
     return;
   }
   else if(queue > 0){
