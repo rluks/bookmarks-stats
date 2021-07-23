@@ -1,7 +1,16 @@
 function getCurrentBookmarkCount(data){
-    let maxKey = Object.keys(data).reduce((a, b) => a > b ? a : b);
-    let bookmarkCount = data[maxKey];
+    let bookmarkCount = data[getMaxDate(data)];
     return bookmarkCount;
 }
 
-export {getCurrentBookmarkCount}
+function getMinDate(data){
+    let minKey = Object.keys(data).reduce((a, b) => a < b ? a : b);
+    return minKey;
+}
+
+function getMaxDate(data){
+    let maxKey = Object.keys(data).reduce((a, b) => a > b ? a : b);
+    return maxKey;
+}
+
+export {getCurrentBookmarkCount, getMinDate, getMaxDate}

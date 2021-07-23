@@ -1,3 +1,5 @@
+import {getMinDate, getMaxDate} from '/ui-count.js';
+
 /* find minimum and maximum in array */
 function arrMin(array) { return Math.min.apply(Math, array); }
 function arrMax(array) { return Math.max.apply(Math, array); }
@@ -18,16 +20,12 @@ function createCanvas() {
 
 let myLineChart;
 
-function minimumDatetime(statsHistory){
-    return statsHistory[Object.keys(statsHistory)[0]]; //first record
-}
-
 function minimumCount(statsHistory){
     return arrMin(Object.values(statsHistory));
 }
 
-function chartMin(){
-    let chartMin = minimumCount() - (10 * minimumCount() / 100); //10%
+function chartMin(statsHistory){
+    let chartMin = minimumCount(statsHistory) - (10 * minimumCount(statsHistory) / 100); //10%
     chartMin = (chartMin < 0) ? 0 : chartMin;
     chartMin = toInt(chartMin);
     return chartMin;
@@ -37,8 +35,8 @@ function maximumCount(statsHistory){
     return arrMax(Object.values(statsHistory));
 }
 
-function chartMax(){
-    let chartMax = maximumCount() + (10 * maximumCount() / 100); //10%
+function chartMax(statsHistory){
+    let chartMax = maximumCount(statsHistory) + (10 * maximumCount(statsHistory) / 100); //10%
     chartMax = toInt(chartMax);
     return chartMax;
 }
@@ -58,7 +56,7 @@ function createChart(statsHistory) {
             xAxes: [{
                     type: 'time',
                     time: {
-                        unitStepSize: 0.5,
+                        //unitStepSize: 0.5,
                         round: 'minutes',
                         tooltipFormat: 'YYYY-MM-DD HH:mm',
                         displayFormats: {
@@ -66,14 +64,14 @@ function createChart(statsHistory) {
                         }
                     },
                     ticks: {
-                        min: minimumDatetime(statsHistory),
-                        max: new Date()
+                        min: getMinDate(statsHistory),
+                        max: getMaxDate(statsHistory)
                     }
                 }],
             yAxes: [{
                     ticks: {
-                        //suggestedMin: chartMin(),
-                        //suggestedMax: chartMax(),
+                        suggestedMin: chartMin(statsHistory),
+                        suggestedMax: chartMax(statsHistory),
                         userCallback: function (label, index, labels) {
                             // when the floored value is the same as the value we have a whole number
                             if (Math.floor(label) === label) {
@@ -84,7 +82,6 @@ function createChart(statsHistory) {
                 }]
         }
     };
-
     myLineChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -107,12 +104,19 @@ function createChart(statsHistory) {
 function updateChart(data){
     console.log(new Date().toISOString() + " updateChart");
 
-    myLineChart.data.labels = Object.keys(data);
-    myLineChart.data.datasets.data = Object.values(data);
-    /*myLineChart.options.scales.xAxes.ticks = {
-        min: minimumDatetime(data),
-        max: new Date()
-    };*/
+    myLineChart.data.labels.push(Object.keys(data));
+
+    myLineChart.data.datasets.forEach((dataset) => {
+        dataset.data.push(Object.values(data));
+    });
+
+    myLineChart.options.scales.xAxes.ticks = {
+        min: getMinDate(data),
+        max: getMaxDate(data)
+    };
+
+    console.log(myLineChart.options.scales.xAxes.ticks.min + 
+        " > " + myLineChart.options.scales.xAxes.ticks.max);
 
     myLineChart.update();
 }
