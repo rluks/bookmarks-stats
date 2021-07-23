@@ -44,6 +44,7 @@ function chartMax(statsHistory){
 
 function createChart(statsHistory) {
     console.log("createChart");
+    console.log(statsHistory);
 
     var sketchCanvas = createCanvas();
     var ctx = sketchCanvas.getContext('2d');  
@@ -70,8 +71,8 @@ function createChart(statsHistory) {
                 }],
             yAxes: [{
                     ticks: {
-                        suggestedMin: chartMin(statsHistory),
-                        suggestedMax: chartMax(statsHistory),
+                        //suggestedMin: chartMin(statsHistory),
+                        //suggestedMax: chartMax(statsHistory),
                         userCallback: function (label, index, labels) {
                             // when the floored value is the same as the value we have a whole number
                             if (Math.floor(label) === label) {
@@ -103,6 +104,7 @@ function createChart(statsHistory) {
 
 function updateChart(data){
     console.log(new Date().toISOString() + " updateChart");
+    console.log(data);
 
     myLineChart.data.labels.push(Object.keys(data));
 
@@ -110,13 +112,11 @@ function updateChart(data){
         dataset.data.push(Object.values(data));
     });
 
-    myLineChart.options.scales.xAxes.ticks = {
-        min: getMinDate(data),
-        max: getMaxDate(data)
-    };
-
-    console.log(myLineChart.options.scales.xAxes.ticks.min + 
-        " > " + myLineChart.options.scales.xAxes.ticks.max);
+    let newxAxes = myLineChart.options.scales.xAxes[0];
+    newxAxes.ticks.min = getMinDate(data);
+    newxAxes.ticks.max = getMaxDate(data);
+    console.log(newxAxes);
+    myLineChart.options.scales.xAxes[0] = newxAxes;
 
     myLineChart.update();
 }
