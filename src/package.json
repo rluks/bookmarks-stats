@@ -15,5 +15,8 @@
     "addon"
   ],
   "author": "Roman Luks",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^3.4.1"
+  }
 }
