@@ -13,8 +13,26 @@ function onBrowserAction(){
     }
 }
 
+function formatBadgeText(count){
+    let countText;
+    if(count > 9999){//only 4 digits are visible
+        let countThousands = count / 1000;
+        countThousands = Math.trunc(countThousands);
+        countText = countThousands.toString() + "k";
+    }else{
+        countText = count.toString();
+    }
+    
+    return countText;
+}
+
 function updateBadge(count) {
-    browser.browserAction.setBadgeText({ text: count.toString() });
+    let text = formatBadgeText(count);
+    setBadgeText(text);
+}
+
+function setBadgeText(text){
+    browser.browserAction.setBadgeText({ text: text});
 }
 
 export {onBrowserAction, updateBadge};
