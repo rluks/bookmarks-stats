@@ -5,7 +5,7 @@ import { sendBookmarkStats } from '/bg/send.js';
 let bookmarkStatsData = {};
 
 function onBookmarksSearchFulfilled(bookmarks){;
-    const ignoredScheme = /^(place|about|javascript|data)\:/i;//TODO do I want to ignore these?
+    const ignoredScheme = /^(place|javascript|data)\:/i;//TODO do I want to ignore these?
     let queue = [];
     for (const bookmark of bookmarks) {
         const url = bookmark.url;
