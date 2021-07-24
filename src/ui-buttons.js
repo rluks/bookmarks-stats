@@ -1,3 +1,5 @@
+import {requestHistoryClear} from '/ui.js';
+
 function showClearStatsBtn() {
     let btn = document.getElementById("clear-history-btn");
     btn.className = "showme";
@@ -19,7 +21,7 @@ function setButtonsListeners() {
     });
 
     document.getElementById('clear-history-btn').addEventListener('click', function () {
-        requestClearingHistoryStorage();
+        requestHistoryClear();
         window.location.reload();
     });
     

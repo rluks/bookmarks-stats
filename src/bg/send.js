@@ -9,6 +9,10 @@ function notifyRefreshing(){
     send("notification", "refreshing");
 }
 
+function notifyClearing(){
+    send("notification", "clearing");
+}
+
 function send(msgType, data){
     let tabid = getForegroundID();
     if (typeof tabid !== "undefined") {
@@ -16,4 +20,4 @@ function send(msgType, data){
     }
 }
 
-export { sendBookmarkStats, notifyRefreshing };
+export { sendBookmarkStats, notifyRefreshing, notifyClearing };

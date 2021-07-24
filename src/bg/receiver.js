@@ -9,6 +9,8 @@ function onMessage(message, sender, sendResponse) {
 
         //but update the stats and then once ready send the new stats
         refreshBookmarkStats().then(sendBookmarkStats);
+    }else if (message.type == "clear-history"){
+        clearHistory();
     }
 }
 

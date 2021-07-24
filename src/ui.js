@@ -21,6 +21,10 @@ function updateUI(data){
     updateNotification("Data updated");
 }
 
+function requestHistoryClear(){
+    browser.runtime.sendMessage({ type: "clear-history" });
+}
+
 browser.runtime.sendMessage({ type: "hello" });
 
 browser.runtime.onMessage.addListener((message) => {
@@ -33,3 +37,5 @@ browser.runtime.onMessage.addListener((message) => {
 });
 
 setButtonsListeners();
+
+export {requestHistoryClear}
