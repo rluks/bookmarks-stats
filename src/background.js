@@ -1,7 +1,7 @@
 import { onBrowserAction } from '/bg/browseraction.js';
 import { handleRemoved } from '/bg/foregroundinfo.js';
 import { onMessage } from '/bg/receiver.js';
-import { refreshBookmarkStats } from '/bg/bookmarkdata.js';
+import { refreshBookmarkStats, loadHistoryStats } from '/bg/bookmarkdata.js';
 import { throttle } from '/bg/throttle.js';
 
 browser.runtime.onMessage.addListener(onMessage);
@@ -13,6 +13,6 @@ function addBookmarkListeners() {
     browser.bookmarks.onRemoved.addListener(throttle);
 }
 
-//TODO load from storage
+loadHistoryStats();
 addBookmarkListeners()
 refreshBookmarkStats();

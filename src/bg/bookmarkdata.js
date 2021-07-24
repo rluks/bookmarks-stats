@@ -1,5 +1,6 @@
 import { updateBadge } from '/bg/browseraction.js';
-import { sendBookmarkStats, notifyRefreshing } from '/bg/send.js';
+import { sendBookmarkStats, notifyRefreshing, notifyClearing } from '/bg/send.js';
+import { storeCount, loadHistory, clearStorage } from '/bg/storage.js';
 
 let bookmarkStatsData = {};
 
@@ -19,7 +20,7 @@ function onBookmarksSearchFulfilled(bookmarks){;
     bookmarkStatsData[dateNow] = bookmarksCount;
     updateBadge(bookmarksCount);
     sendBookmarkStats();
-    //TODO incrementally add stats to storage
+    storeCount(dateNow, bookmarksCount);
 }
 
 function refreshBookmarkStats(){
@@ -27,4 +28,31 @@ function refreshBookmarkStats(){
     return browser.bookmarks.search({}).then(onBookmarksSearchFulfilled);
 }
 
-export { bookmarkStatsData, refreshBookmarkStats };
+function loadHistoryStats(){
+    loadHistory();
+}
+
+function addBookmarkStatsData(obj){
+
+    /*console.log("Current stats: ");
+    console.log(bookmarkStatsData);
+
+    console.log("History from storage: ");
+    console.log(obj);*/
+     
+    bookmarkStatsData = Object.assign(obj, bookmarkStatsData); //TODO if this is unrealiable I can add sorting...
+}
+
+function clearHistory(){
+    notifyClearing();
+    bookmarkStatsData = {};
+    clearStorage();
+}
+
+export { 
+    bookmarkStatsData, 
+    refreshBookmarkStats, 
+    loadHistoryStats, 
+    addBookmarkStatsData,
+    clearHistory
+};

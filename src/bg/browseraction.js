@@ -2,7 +2,7 @@ import { isRegistered, registerForeground, getTabsObj, getForegroundID } from '/
 
 function onCreated(tab) {
     registerForeground(tab);
-  }
+}
 
 function onBrowserAction(){
     if(isRegistered()){
