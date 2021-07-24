@@ -1,4 +1,4 @@
-import {requestHistoryClear} from '/ui.js';
+import {requestHistoryClear, requestHistoryDownload} from '/ui.js';
 
 function showClearStatsBtn() {
     let btn = document.getElementById("clear-history-btn");
@@ -17,7 +17,7 @@ function hideClearStatsBtn() {
 function setButtonsListeners() {
     
     document.getElementById('download-history-btn').addEventListener('click', function () {
-        downloadHistory();
+        requestHistoryDownload();
     });
 
     document.getElementById('clear-history-btn').addEventListener('click', function () {

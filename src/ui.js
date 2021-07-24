@@ -2,6 +2,8 @@ import {updateBookmarkCount, updateDatapointsCount, updateNotification} from '/u
 import {createChart, updateChart} from '/ui-chart.js';
 import {setButtonsListeners} from '/ui-buttons.js';
 import {getCurrentBookmarkCount} from '/ui-count.js';
+import {downloadHistory} from '/ui-download.js';
+
 
 let data = {};
 let firstRun = true;
@@ -25,6 +27,10 @@ function requestHistoryClear(){
     browser.runtime.sendMessage({ type: "clear-history" });
 }
 
+function requestHistoryDownload(){
+    downloadHistory(data);
+}
+
 browser.runtime.sendMessage({ type: "hello" });
 
 browser.runtime.onMessage.addListener((message) => {
@@ -38,4 +44,4 @@ browser.runtime.onMessage.addListener((message) => {
 
 setButtonsListeners();
 
-export {requestHistoryClear}
+export {requestHistoryClear, requestHistoryDownload}
