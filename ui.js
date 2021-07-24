@@ -1,8 +1,8 @@
-import {updateBookmarkCount, updateDatapointsCount, updateNotification} from '/ui-text.js';
-import {createChart, updateChart} from '/ui-chart.js';
-import {setButtonsListeners} from '/ui-buttons.js';
-import {getCurrentBookmarkCount} from '/ui-count.js';
-import {downloadHistory} from '/ui-download.js';
+import {updateBookmarkCount, updateDatapointsCount, updateNotification} from '/ui/text.js';
+import {createChart, updateChart} from '/ui/chart.js';
+import {setButtonsListeners} from '/ui/buttons.js';
+import {getCurrentBookmarkCount} from '/ui/count.js';
+import {downloadHistory} from '/ui/download.js';
 
 
 let data = {};

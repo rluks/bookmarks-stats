@@ -1,4 +1,4 @@
-import {getMinDate, getMaxDate} from '/ui-count.js';
+import {getMinDate, getMaxDate} from '/ui/count.js';
 
 function createCanvas() {
     var canvasDiv = document.getElementById('chart');
