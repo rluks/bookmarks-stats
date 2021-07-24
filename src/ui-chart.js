@@ -30,7 +30,6 @@ function createChart(statsHistory) {
             xAxes: [{
                     type: 'time',
                     time: {
-                        round: 'minutes',
                         tooltipFormat: 'YYYY-MM-DD HH:mm',
                         displayFormats: {
                             second: 'YYYY-MM-DD HH:mm'
