@@ -13,9 +13,22 @@ function isRegistered(){
 }
 
 function handleRemoved(tabId, removeInfo) {
-
     if(tabId === foregroundTab.id){
         unregisterForeground();
+    }
+}
+
+function handleUpdated(tabId, changeInfo, tabInfo){
+    if(tabId === foregroundTab.id){
+        console.log("tab changeinfo:");
+        console.log(changeInfo);
+        if (changeInfo.url){
+            console.log("url change");
+            if(browser.runtime.getURL("index.html") !== changeInfo.url){
+                console.log("unregistering");
+                unregisterForeground();
+            }
+        }
     }
 }
 
@@ -28,4 +41,4 @@ function getForegroundID(){
 }
 
 
-export { getForegroundID, registerForeground, isRegistered, handleRemoved, getTabsObj};
+export { getForegroundID, registerForeground, isRegistered, handleRemoved, getTabsObj, handleUpdated};

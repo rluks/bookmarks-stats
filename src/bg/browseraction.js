@@ -6,8 +6,8 @@ function onCreated(tab) {
 
 function onBrowserAction(){
     if(isRegistered()){
-        browser.tabs.highlight(getTabsObj());
         browser.tabs.reload(getForegroundID());
+        browser.tabs.update(getForegroundID(),{active: true});
     }else{
         browser.tabs.create({ url: "/index.html" }).then(onCreated);
     }
