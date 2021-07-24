@@ -24,7 +24,6 @@ function updateUI(data){
 browser.runtime.sendMessage({ type: "hello" });
 
 browser.runtime.onMessage.addListener((message) => {
-    console.log(message);
     if (message.type === 'data') {
         data = message.data;
         updateUI(data);
