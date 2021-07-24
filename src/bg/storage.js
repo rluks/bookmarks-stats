@@ -23,7 +23,7 @@ function loadHistory() {
 }
 
 function onCleared(){
-    console.log("Storage cleared");
+    console.log("Storage cleared");//TODO notification
 }
 
 function clearStorage() {

@@ -33,13 +33,6 @@ function loadHistoryStats(){
 }
 
 function addBookmarkStatsData(obj){
-
-    /*console.log("Current stats: ");
-    console.log(bookmarkStatsData);
-
-    console.log("History from storage: ");
-    console.log(obj);*/
-     
     bookmarkStatsData = Object.assign(obj, bookmarkStatsData); //TODO if this is unrealiable I can add sorting...
 }
 

@@ -20,12 +20,8 @@ function handleRemoved(tabId, removeInfo) {
 
 function handleUpdated(tabId, changeInfo, tabInfo){
     if(tabId === foregroundTab.id){
-        console.log("tab changeinfo:");
-        console.log(changeInfo);
         if (changeInfo.url){
-            console.log("url change");
             if(browser.runtime.getURL("index.html") !== changeInfo.url){
-                console.log("unregistering");
                 unregisterForeground();
             }
         }
