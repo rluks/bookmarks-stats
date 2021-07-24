@@ -1,5 +1,5 @@
 import { updateBadge } from '/bg/browseraction.js';
-import { sendBookmarkStats } from '/bg/send.js';
+import { sendBookmarkStats, notifyRefreshing } from '/bg/send.js';
 
 let bookmarkStatsData = {};
 
@@ -23,7 +23,7 @@ function onBookmarksSearchFulfilled(bookmarks){;
 }
 
 function refreshBookmarkStats(){
-    //TODO poslat zpravu frontendu ze refreshuje
+    notifyRefreshing();
     return browser.bookmarks.search({}).then(onBookmarksSearchFulfilled);
 }
 

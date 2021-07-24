@@ -1,4 +1,4 @@
-import {updateBookmarkCount, updateDatapointsCount} from '/ui-text.js';
+import {updateBookmarkCount, updateDatapointsCount, updateNotification} from '/ui-text.js';
 import {createChart, updateChart} from '/ui-chart.js';
 import {setButtonsListeners} from '/ui-buttons.js';
 import {getCurrentBookmarkCount} from '/ui-count.js';
@@ -18,14 +18,18 @@ function updateUI(data){
         updateChart(data);
     }
 
+    updateNotification("Data updated");
 }
 
 browser.runtime.sendMessage({ type: "hello" });
 
 browser.runtime.onMessage.addListener((message) => {
+    console.log(message);
     if (message.type === 'data') {
         data = message.data;
         updateUI(data);
+    }else if(message.type === "notification"){
+        updateNotification(message.data);
     }
 });
 

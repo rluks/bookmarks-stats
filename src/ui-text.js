@@ -10,4 +10,9 @@ function updateDatapointsCount(count) {
     }
 }
 
-export {updateBookmarkCount, updateDatapointsCount}
+function updateNotification(msg){
+    document.querySelector('#notification').textContent = msg;
+    console.log(msg);
+}
+
+export {updateBookmarkCount, updateDatapointsCount, updateNotification}
