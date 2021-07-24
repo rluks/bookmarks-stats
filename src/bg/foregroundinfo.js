@@ -28,13 +28,9 @@ function handleUpdated(tabId, changeInfo, tabInfo){
     }
 }
 
-function getTabsObj(){
-    return {"tabs" : foregroundTab.index};
-}
-
 function getForegroundID(){
     return foregroundTab.id;
 }
 
 
-export { getForegroundID, registerForeground, isRegistered, handleRemoved, getTabsObj, handleUpdated};
+export { getForegroundID, registerForeground, isRegistered, handleRemoved, handleUpdated};

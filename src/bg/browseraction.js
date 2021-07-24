@@ -1,4 +1,4 @@
-import { isRegistered, registerForeground, getTabsObj, getForegroundID } from '/bg/foregroundinfo.js';
+import { isRegistered, registerForeground, getForegroundID } from '/bg/foregroundinfo.js';
 
 function onCreated(tab) {
     registerForeground(tab);
