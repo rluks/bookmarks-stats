@@ -14,6 +14,8 @@ function hideClearStatsBtn() {
     noBtn.className = "hideme";
 }
 
+//TODO import stats history
+
 function setButtonsListeners() {
     
     document.getElementById('download-history-btn').addEventListener('click', function () {
