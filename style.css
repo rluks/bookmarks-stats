@@ -1,0 +1,35 @@
+* {
+	font-family: sans-serif;
+}
+
+#history-table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 7px;
+	margin: 0 auto;
+}
+
+.center {
+	margin: auto;
+	width: 90%;
+	padding: 10px;
+	text-align: center;
+}
+
+ul {
+	display: table;
+	margin: 0 auto;
+	text-align: left;
+}
+
+.hideme {
+	display: none;
+}
+
+.showme {
+	display: inline;
+}
+
+#clear-history-btn{
+	color: red;
+}
