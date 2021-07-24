@@ -20,6 +20,11 @@
     padding: 10px;
     text-align: center;
   }
+  ul {
+  display: table;
+  margin: 0 auto;
+  text-align: left;
+  }
   .hideme {
     display: none;
   }
@@ -45,8 +50,6 @@
 <div id="chart" class="center" style="width:600px; height:500px;">
 </div>
 
-<hr>
-
 <div class="center">
   <div id="datapoints-count-div" class="center">
       <span id="datapointscount">(loading...)</span>
@@ -61,12 +64,29 @@
   </div>
 </div>
 
-TODO links to bookmark cleaning addons
+<hr>
 
-<footer>
-  <p>Author: <a href="https://romanluks.eu/">Roman Luks</a></p>
-  <p>Icons made by <a href="https://www.flaticon.com/authors/dmitri13" title="dmitri13">dmitri13</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
-</footer> 
+<div id="bookmark-cleaning">
+  <p>Need help cleaning up your bookmars?
+    Here are a few options:</p>
+<div>
+  <ul>
+    <li><a href="https://addons.mozilla.org/en-US/firefox/addon/404-bookmarks/">404 Bookmarks</a> by Tom Schuster</li>
+    <li><a href="https://addons.mozilla.org/en-US/firefox/addon/bookmark-randomizer/">bookmark randomizer</a> by li@ng</li>
+    <li><a href="https://addons.mozilla.org/en-US/firefox/addon/bookmarks-organizer/">Bookmarks Organizer</a> by Sören Hentzschel</li>
+    <li><a href="https://addons.mozilla.org/en-US/firefox/addon/keep-or-delete-bookmarks/">Keep or Delete Bookmarks</a> by Sören Hentzschel</li>
+  </ul> 
+</div>
+</div>
+
+<hr>
+
+<div>
+  <footer>
+    <p>Author: <a href="https://romanluks.eu/">Roman Luks</a></p>
+    <p>Icons made by <a href="https://www.flaticon.com/authors/dmitri13" title="dmitri13">dmitri13</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
+  </footer> 
+</div>
 
 </div>
 <script type="module" src="ui.js"></script>
