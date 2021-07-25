@@ -1,5 +1,5 @@
 import { updateBadge } from '/bg/browseraction.js';
-import { sendBookmarkStats, notifyRefreshing, notifyClearing } from '/bg/send.js';
+import { sendBookmarkStats, notifyRefreshing, notifyClearing, notifyCleared } from '/bg/send.js';
 import { storeCount, loadHistory, clearStorage } from '/bg/storage.js';
 
 let bookmarkStatsData = {};
@@ -39,7 +39,7 @@ function addBookmarkStatsData(obj){
 function clearHistory(){
     notifyClearing();
     bookmarkStatsData = {};
-    clearStorage();
+    clearStorage().then(notifyCleared());
 }
 
 export { 

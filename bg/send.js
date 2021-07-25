@@ -6,11 +6,15 @@ function sendBookmarkStats(){
 }
 
 function notifyRefreshing(){
-    send("notification", "refreshing");
+    send("notification", "Refreshing");
 }
 
 function notifyClearing(){
-    send("notification", "clearing");
+    send("notification", "Removing");
+}
+
+function notifyCleared(){
+    send("notification", "Stats removed. Add or remove bookmarks to generate new stats.");
 }
 
 function send(msgType, data){
@@ -20,4 +24,4 @@ function send(msgType, data){
     }
 }
 
-export { sendBookmarkStats, notifyRefreshing, notifyClearing };
+export { sendBookmarkStats, notifyRefreshing, notifyClearing, notifyCleared};

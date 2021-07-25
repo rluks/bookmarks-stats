@@ -22,13 +22,8 @@ function loadHistory() {
     browser.storage.local.get(null).then(onStorageItems, onStorageError);
 }
 
-function onCleared(){
-    console.log("Storage cleared");//TODO notification
-}
-
 function clearStorage() {
-    var clearStorage = browser.storage.local.clear();
-    clearStorage.then(onCleared, onStorageError);
+    return browser.storage.local.clear();
 }
 
 export {storeCount, loadHistory, clearStorage}
