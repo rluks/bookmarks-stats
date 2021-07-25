@@ -86,9 +86,6 @@ function createChart(statsHistory) {
         },
         options: options
     });
-    console.log(myLineChart.scales["x-axis-0"].options.gridLines);
-    console.log(myLineChart.scales["x-axis-0"].options.gridLines.color);
-    console.log(myLineChart.options.legend);
 }
 
 function updateChart(data){
