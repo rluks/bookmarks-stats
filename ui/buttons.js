@@ -1,17 +1,18 @@
 import {requestHistoryClear, requestHistoryDownload} from '/ui.js';
 
 function showClearStatsBtn() {
-    let btn = document.getElementById("clear-history-btn");
-    btn.className = "showme";
-    let noBtn = document.getElementById("dont-clear-history-btn");
-    noBtn.className = "showme";
+    ChangeElVisibility("clear-history-btn", "showme");
+    ChangeElVisibility("dont-clear-history-btn", "showme");
 }
 
 function hideClearStatsBtn() {
-    let btn = document.getElementById("clear-history-btn");
-    btn.className = "hideme";
-    let noBtn = document.getElementById("dont-clear-history-btn");
-    noBtn.className = "hideme";
+    ChangeElVisibility("clear-history-btn", "hideme");
+    ChangeElVisibility("dont-clear-history-btn", "hideme");
+}
+
+function ChangeElVisibility(elID, visibilityClass){
+    let mEl = document.getElementById(elID);
+    mEl.className = visibilityClass;
 }
 
 //TODO import stats history
@@ -30,6 +31,7 @@ function setButtonsListeners() {
     document.getElementById('clear-history-p').addEventListener('click', showClearStatsBtn);
 
     document.getElementById('dont-clear-history-btn').addEventListener('click', hideClearStatsBtn);
+
 }
 
 export{setButtonsListeners}
