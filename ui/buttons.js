@@ -13,8 +13,6 @@ function ChangeElVisibility(elID, visibilityClass){
     mEl.classList.toggle(visibilityClass);
 }
 
-//TODO import stats history
-
 function setButtonsListeners() {
     
     document.getElementById('download-history-btn').addEventListener('click', function () {

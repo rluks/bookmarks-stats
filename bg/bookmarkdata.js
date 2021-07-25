@@ -5,7 +5,7 @@ import { storeCount, loadHistory, clearStorage } from '/bg/storage.js';
 let bookmarkStatsData = {};
 
 function onBookmarksSearchFulfilled(bookmarks){;
-    const ignoredScheme = /^(place|javascript|data)\:/i;//TODO do I want to ignore these?
+    const ignoredScheme = /^(place|javascript|data)\:/i;
     let queue = [];
     for (const bookmark of bookmarks) {
         const url = bookmark.url;
@@ -33,7 +33,7 @@ function loadHistoryStats(){
 }
 
 function addBookmarkStatsData(obj){
-    bookmarkStatsData = Object.assign(obj, bookmarkStatsData); //TODO if this is unrealiable I can add sorting...
+    bookmarkStatsData = Object.assign(obj, bookmarkStatsData);
 }
 
 function clearHistory(){
