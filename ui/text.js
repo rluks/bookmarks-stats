@@ -10,8 +10,13 @@ function updateDatapointsCount(count) {
     }
 }
 
+function getNowTimeStr(){
+    let nowTime = new Date().toTimeString().split(' ')[0];
+    return nowTime;
+}
+
 function updateNotification(msg){
-    document.querySelector('#notification').textContent = msg;
+    document.querySelector('#notification').textContent = "[" + getNowTimeStr() + "] " + msg;
 }
 
 function updateVersion(v){
