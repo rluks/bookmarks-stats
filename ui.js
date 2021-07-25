@@ -9,6 +9,11 @@ let data = {};
 let firstRun = true;
 
 function updateUI(data){
+    if(Object.keys(data).length === 0){
+        updateNotification("No stats. Add or remove bookmarks to generate it.");
+        return;
+    }
+
     updateBookmarkCount(getCurrentBookmarkCount(data));
     updateDatapointsCount(Object.keys(data).length);
 
