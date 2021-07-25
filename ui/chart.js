@@ -58,7 +58,7 @@ function createChart(statsHistory) {
             labels: Object.keys(statsHistory),
             datasets: [{
                     data: Object.values(statsHistory),
-                    label: 'Count',
+                    label: 'Bookmark count over time',
                     lineTension: 0.05,
                     borderColor: '#3e95cd',
                     fill: false,
