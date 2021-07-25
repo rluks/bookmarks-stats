@@ -14,4 +14,8 @@ function updateNotification(msg){
     document.querySelector('#notification').textContent = msg;
 }
 
-export {updateBookmarkCount, updateDatapointsCount, updateNotification}
+function updateVersion(v){
+    document.querySelector('#version').textContent = v;
+}
+
+export {updateBookmarkCount, updateDatapointsCount, updateNotification, updateVersion}

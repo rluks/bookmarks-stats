@@ -1,4 +1,4 @@
-import {updateBookmarkCount, updateDatapointsCount, updateNotification} from '/ui/text.js';
+import {updateBookmarkCount, updateDatapointsCount, updateNotification, updateVersion} from '/ui/text.js';
 import {createChart, updateChart} from '/ui/chart.js';
 import {setButtonsListeners} from '/ui/buttons.js';
 import {getCurrentBookmarkCount} from '/ui/count.js';
@@ -42,5 +42,6 @@ browser.runtime.onMessage.addListener((message) => {
 });
 
 setButtonsListeners();
+updateVersion(browser.runtime.getManifest().version);
 
 export {requestHistoryClear, requestHistoryDownload}
