@@ -2,6 +2,14 @@
 	font-family: sans-serif;
 }
 
+body {
+	background-color: #cecece;
+}
+
+#canvas{
+	background: #cecece;
+}
+
 #history-table, th, td {
 	border: 1px solid black;
 	border-collapse: collapse;
@@ -75,4 +83,14 @@ ul {
 
 .showme {
 	display: inline;
+}
+
+.box {
+    margin:0 0 25px;
+    overflow:hidden;
+    padding:20px;
+    background-color:#9e9e9e;
+    border:1px solid #cecece;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
