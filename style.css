@@ -10,7 +10,7 @@ body {
 
 body {
 	padding: 25px;
-	font-size: 25px;
+	font-size: x-large;
 	color: var(--text-color);
 	background: var(--bkg-color);
   }
@@ -30,53 +30,63 @@ ul {
 	display: table;
 	margin: 0 auto;
 	text-align: left;
+	font-size: medium;
+}
+
+summary {
+	font-size: large;
+}
+
+footer {
+	font-size: small;
 }
 
 .button {
 	background-color: #4CAF50; /* Green */
-	border: none;
-	color: white;
-	padding: 16px 32px;
+	color: var(--text-color);
+	padding: 8px 16px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 16px;
-	margin: 4px 2px;
+	font-size: medium;
+	margin: 20px 10px 20px 10px; /* up, right, bottom, left */
 	transition-duration: 0.4s;
 	cursor: pointer;
+	border: 3px solid red;
 }
   
 .button-blue {
-	background-color: white; 
+	background-color: var(--text-color); 
 	color: black; 
-	border: 2px solid #008CBA;
+	border-color: #008CBA;
 }
 
 .button-blue:hover {
 	background-color: #008CBA;
-	color: white;
+	color: var(--text-color);
 }
 
 .button-black {
-	background-color: white;
+	background-color: var(--text-color);
 	color: black;
-	border: 2px solid #555555;
+	border-color: #555555;
 }
 
 .button-black:hover {
 	background-color: #555555;
-	color: white;
+	color: var(--text-color);
 }
 
 .button-red {
-	background-color: white; 
+	background-color: var(--text-color); 
 	color: black; 
-	border: 2px solid #f44336;
+	border-color: #f44336;
+	margin: 0px 10px 20px 10px; /* up, right, bottom, left */
 }
 
 .button-red:hover {
 	background-color: #f44336;
-	color: white;
+	color: var(--text-color);
 }
 
 .hideme {
@@ -91,9 +101,9 @@ ul {
     margin:0 0 25px;
     overflow:hidden;
     padding:20px;
-    background-color: var(--bkg-color);
+    background-color: #555555;
     border:1px solid var(--bkg-color);
     -webkit-border-radius: 5px;
     border-radius: 5px;
-	font-size: 14px;
+	font-size: small;
 }
