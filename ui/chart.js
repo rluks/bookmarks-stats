@@ -21,6 +21,7 @@ function createChart(statsHistory) {
 
     var sketchCanvas = createCanvas();
     var ctx = sketchCanvas.getContext('2d');  
+    let elColor = '#eee';
     var options = {
         title: {
             display: false,
@@ -37,8 +38,14 @@ function createChart(statsHistory) {
                     },
                     ticks: {
                         min: getMinDate(statsHistory),
-                        max: getMaxDate(statsHistory)
+                        max: getMaxDate(statsHistory),
+                        fontColor: elColor
+                    },
+                    
+                    gridLines:{
+                        color: elColor
                     }
+                    
                 }],
             yAxes: [{
                     ticks: {
@@ -48,8 +55,18 @@ function createChart(statsHistory) {
                                 return label;
                             }
                         },
+                        fontColor: elColor
+                    },
+
+                    gridLines:{
+                        color: elColor
                     }
-                }]
+                }] 
+        },
+        legend: {
+            labels: {
+                fontColor: elColor
+            }
         }
     };
     myLineChart = new Chart(ctx, {
@@ -69,6 +86,9 @@ function createChart(statsHistory) {
         },
         options: options
     });
+    console.log(myLineChart.scales["x-axis-0"].options.gridLines);
+    console.log(myLineChart.scales["x-axis-0"].options.gridLines.color);
+    console.log(myLineChart.options.legend);
 }
 
 function updateChart(data){
