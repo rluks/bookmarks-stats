@@ -1,3 +1,6 @@
+let refreshingIntervalId;
+let refreshingDotCount;
+
 function updateBookmarkCount(bookmarksCount) {
     document.querySelector('#counter').textContent = bookmarksCount;
 }
@@ -17,6 +20,18 @@ function getNowTimeStr(){
 
 function updateNotification(msg){
     document.querySelector('#notification').textContent = "[" + getNowTimeStr() + "] " + msg;
+
+    if(msg === "Refreshing"){   
+        clearInterval(refreshingIntervalId); 
+        refreshingIntervalId = setInterval(updateRefreshing, 400);
+    }else{
+        clearInterval(refreshingIntervalId);    
+    }
+}
+
+function updateRefreshing(){
+    console.log(new Date() + " adding dot"); 
+    document.querySelector('#notification').textContent += ".";
 }
 
 function updateVersion(v){
