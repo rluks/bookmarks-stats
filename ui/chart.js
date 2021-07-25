@@ -22,10 +22,15 @@ function createChart(statsHistory) {
     var sketchCanvas = createCanvas();
     var ctx = sketchCanvas.getContext('2d');  
     let elColor = '#eee';
-    let minCount = getMinCount(statsHistory) - 1;
+
+    let minCount = getMinCount(statsHistory);
+    minCount = Math.floor((minCount * 0.95) - 1);
     if(minCount < 0){
         minCount = 0;
     }
+
+    let maxCount = getMaxCount(statsHistory);
+    maxCount = Math.floor((maxCount * 1.05) + 1);
 
     var options = {
         title: {
@@ -61,7 +66,7 @@ function createChart(statsHistory) {
                             }
                         },
                         fontColor: elColor,
-                        max: getMaxCount(statsHistory)+1,
+                        max: maxCount,
                         min: minCount
                     },
 
