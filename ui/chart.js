@@ -1,4 +1,4 @@
-import {getMinDate, getMaxDate} from '/ui/count.js';
+import {getMinDate, getMaxDate, getMinCount, getMaxCount} from '/ui/count.js';
 
 function createCanvas() {
     var canvasDiv = document.getElementById('chart');
@@ -22,6 +22,11 @@ function createChart(statsHistory) {
     var sketchCanvas = createCanvas();
     var ctx = sketchCanvas.getContext('2d');  
     let elColor = '#eee';
+    let minCount = getMinCount(statsHistory) - 1;
+    if(minCount < 0){
+        minCount = 0;
+    }
+
     var options = {
         title: {
             display: false,
@@ -55,7 +60,9 @@ function createChart(statsHistory) {
                                 return label;
                             }
                         },
-                        fontColor: elColor
+                        fontColor: elColor,
+                        max: getMaxCount(statsHistory)+1,
+                        min: minCount
                     },
 
                     gridLines:{
