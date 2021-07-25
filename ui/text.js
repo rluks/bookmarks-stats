@@ -4,9 +4,9 @@ function updateBookmarkCount(bookmarksCount) {
 
 function updateDatapointsCount(count) {
     if(count === 0){
-        document.querySelector('#datapointscount').textContent = "No bookmark history. Continue using your bookmarks as usual and check back later.";
+        document.querySelector('#datapointscount').textContent = "No records. Make some changes to your bookmarks.";
     }else{
-        document.querySelector('#datapointscount').textContent = "Bookmarks history: " + count + " changes recorded.";
+        document.querySelector('#datapointscount').textContent = "" + count + " records";
     }
 }
 
