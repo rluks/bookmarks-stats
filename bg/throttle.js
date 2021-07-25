@@ -1,7 +1,7 @@
 import { refreshBookmarkStats } from '/bg/bookmarkdata.js';
 
 let enableCall = true;
-const defaultInterval = 400;
+const defaultInterval = 300;
 let interval = defaultInterval;//milliseconds
 let queue = 0;
 let maxQueue = 0;
