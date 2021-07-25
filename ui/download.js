@@ -10,7 +10,7 @@ function download(filename, data) {
 
 function downloadHistory(data) {
     var filename = "bookmark_stats.json";
-    download(filename, JSON.stringify(data));
+    download(filename, JSON.stringify(data, null, " "));
 }
 
 export {downloadHistory}
