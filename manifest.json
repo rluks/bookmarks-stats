@@ -3,13 +3,7 @@
   "description": "Bookmark statistics",
   "manifest_version": 2,
   "name": "Bookmark stats",
-  "version": "1.7.0.1",
-  
-  "applications": {
-	  "gecko": {
-		"id": "{4d5f3c0b-d0c5-4082-9c48-22dd1981cd14}" 
-	  }
-  },
+  "version": "1.7.0.2",
 
   "permissions": [
     "bookmarks", "<all_urls>", "storage"
