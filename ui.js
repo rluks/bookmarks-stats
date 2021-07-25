@@ -19,7 +19,7 @@ function updateUI(data){
         updateChart(data);
     }
 
-    updateNotification("updated");
+    updateNotification("Updated");
 }
 
 function requestHistoryClear(){
