@@ -30,8 +30,6 @@ function createChart(statsHistory) {
 
     let maxCount = Math.ceil((getMaxCount(statsHistory)+1)/10)*10;
 
-    //console.log("min " + minCount + " max " + maxCount);
-
     var options = {
         title: {
             display: false,
@@ -43,12 +41,13 @@ function createChart(statsHistory) {
                     time: {
                         tooltipFormat: 'YYYY-MM-DD HH:mm',
                         displayFormats: {
-                            second: 'YYYY-MM-DD HH:mm'
+                            millisecond: 'HH:mm:ss',
+                            second: 'HH:mm:ss',
+                            minute: 'MM-DD HH:mm',
+                            hour: 'MM-DD HH:mm'
                         }
                     },
                     ticks: {
-                        min: getMinDate(statsHistory),
-                        max: getMaxDate(statsHistory),
                         fontColor: elColor
                     },
                     
