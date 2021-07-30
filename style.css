@@ -107,3 +107,7 @@ footer {
     border-radius: 5px;
 	font-size: small;
 }
+
+i.material-icons {
+	vertical-align: text-bottom;
+  }
