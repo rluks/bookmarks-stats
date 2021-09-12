@@ -13,4 +13,14 @@ function getMaxDate(data){
     return maxKey;
 }
 
-export {getCurrentBookmarkCount, getMinDate, getMaxDate}
+function getMinCount(data){
+    let min = Object.values(data).reduce((a, b) => a < b ? a : b);
+    return min;
+}
+
+function getMaxCount(data){
+    let max = Object.values(data).reduce((a, b) => a > b ? a : b);
+    return max;
+}
+
+export {getCurrentBookmarkCount, getMinDate, getMaxDate, getMaxCount, getMinCount}

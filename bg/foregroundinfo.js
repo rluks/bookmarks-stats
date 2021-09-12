@@ -1,7 +1,7 @@
 let foregroundTab = {};
 
 function registerForeground(tab){
-    foregroundTab = tab;//is this a copy or reference?!
+    foregroundTab = tab;
 }
 
 function unregisterForeground(){
